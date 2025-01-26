@@ -40,7 +40,9 @@ class QzxmCrawler {
     this.startPeriodicCrawling();
   }
 
-  async getLatestVipStockTime(): Promise<PostInfo | null> {
+  async getLatestVipStockTime(
+    timeoutSeconds: number = 5000
+  ): Promise<PostInfo | null> {
     try {
       this.window = new BrowserWindow({
         width: 1280,
@@ -66,7 +68,7 @@ class QzxmCrawler {
       await this.window.loadURL(this.URL);
 
       // 等待内容加载完成
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, timeoutSeconds));
 
       // 执行页面内的 JavaScript 来获取数据
       const posts = await this.window.webContents.executeJavaScript(`
@@ -188,8 +190,8 @@ class QzxmCrawler {
   }
 
   async startPeriodicCrawling(intervalSeconds: number = 30): Promise<void> {
-    // 先执行一次初始抓取
-    const posts = await this.getLatestVipStockTime();
+    // 先执行一次初始抓取，这次等待 2 分钟，以方便进行登录
+    const posts = await this.getLatestVipStockTime(120 * 1000);
     if (posts) {
       this.analyzePostAndReport(posts);
     }

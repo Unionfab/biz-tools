@@ -36,13 +36,59 @@ WATERMARK_MODE="${4:-full}" # 如果没有第4个参数，默认为 "end"
 
 echo "Processing started at $(date)" >"$LOG_FILE"
 
-# 检查必要的命令是否存在
+# 在脚本开头添加环境检测函数
+detect_os() {
+    case "$(uname -s)" in
+        Darwin*)
+            echo "macos"
+            ;;
+        Linux*)
+            echo "linux"
+            ;;
+        MINGW*|MSYS*|CYGWIN*)
+            echo "windows"
+            ;;
+        *)
+            echo "unknown"
+            ;;
+    esac
+}
 
-check_commands() {
-    for cmd in ffmpeg magick; do
-        if ! command -v $cmd &>/dev/null; then
-            echo "Error: $cmd is not installed"
+# 添加字体路径配置
+get_font_path() {
+    local os_type=$(detect_os)
+    case "$os_type" in
+        macos)
+            echo "/System/Library/Fonts/PingFang.ttc"
+            ;;
+        windows)
+            echo "C\\:/Windows/Fonts/msyh.ttc"
+            ;;
+        linux)
+            # Linux 系统可能需要根据实际安装的字体修改
+            echo "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+            ;;
+        *)
+            echo "Error: Unsupported operating system"
             exit 1
+            ;;
+    esac
+}
+
+# 检查命令是否存在
+check_commands() {
+    local os_type=$(detect_os)
+    for cmd in ffmpeg magick; do
+        if [ "$os_type" = "windows" ]; then
+            if ! where $cmd >nul 2>&1; then
+                echo "Error: $cmd is not installed"
+                exit 1
+            fi
+        else
+            if ! command -v $cmd &>/dev/null; then
+                echo "Error: $cmd is not installed"
+                exit 1
+            fi
         fi
     done
 }
@@ -72,9 +118,10 @@ process_video() {
     # 定义三个时间段的水印位置
     if [ "$WATERMARK_MODE" = "center" ]; then
         # 居中水印模式，字体调小
+        local font_path=$(get_font_path)
         ffmpeg -nostdin -hide_banner -loglevel error \
             -i "$input_file" \
-            -vf "drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任；识别码 ${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white:alpha=1:x=(w-text_w)/2:y=(h-text_h)/2" \
+            -vf "drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任；识别码 ${wxid}(${nickname})':fontfile='${font_path}':fontsize=16:fontcolor=white:alpha=1:x=(w-text_w)/2:y=(h-text_h)/2" \
             -c:v libx264 \
             -codec:a copy \
             -y \
@@ -144,10 +191,12 @@ process_image() {
     echo "Processing image: $rel_path for $wxid"
     local date_str=$(date '+%Y-%m-%d')
 
+    local font_path=$(get_font_path)
+
     magick "$input_file" \
         \( -size 300x300 xc:none \
         -gravity center \
-        -font "/System/Library/Fonts/PingFang.ttc" \
+        -font "${font_path}" \
         -pointsize 26 \
         -fill black \
         -draw "rotate -45 text 0,0 'ID：${wxid}_${date_str}，勿公开传播\n\n否则可能承担法律责任'" \
