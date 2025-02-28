@@ -7,8 +7,10 @@ if ! command -v ffmpeg &>/dev/null; then
 fi
 
 # 检查输入参数
-if [ $# -ne 1 ]; then
-    echo "使用方法: $0 <图片文件夹路径>"
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+    echo "使用方法: $0 <图片文件夹路径> [rotate]"
+    echo "参数说明:"
+    echo "  rotate: 可选参数，设置为 'no' 则不进行逆时针旋转"
     exit 1
 fi
 
@@ -41,8 +43,12 @@ process_image() {
         return 1
     fi
 
-    # 生成水印滤镜命令，这个 1.2 不能改
-    local filter="transpose=2,eq=contrast=1.2:brightness=-0.1"
+    # 根据rotate参数决定是否添加transpose滤镜
+    local filter=""
+    if [ "$ROTATE" = "yes" ]; then
+        filter="transpose=2,"
+    fi
+    filter="${filter}eq=contrast=1.2:brightness=-0.1"
 
     # 生成水印网格
     for ((i = -5; i < 15; i++)); do
@@ -68,6 +74,12 @@ process_image() {
 # 获取输入目录的绝对路径
 INPUT_DIR=$(cd "$1" && pwd)
 OUTPUT_DIR="${INPUT_DIR}/watermarked"
+
+# 设置旋转参数
+ROTATE="yes"
+if [ $# -eq 2 ] && [ "$2" = "no" ]; then
+    ROTATE="no"
+fi
 
 # 检查目录是否存在
 if [ ! -d "$INPUT_DIR" ]; then
