@@ -1,0 +1,197 @@
+{
+  "teacher": [
+    {
+      "name": "杨宁",
+      "webhooks": [
+        {
+          "desc": "杨宁小蓝众筹刘飞飞群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=917b0a398e303f25ed66fc779d6118ed4164d46ef03a5fa3a141e9e1d7f4f6a0"
+        },
+        {
+          "desc": "杨宁众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=61c64f279812c3f9a2ff9c6c9606bc7c4db6e50b07eaf04a04d3f39a39140856"
+        },
+        {
+          "desc": "上货：李、杨",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=f0010ce7b66614b0439746079dc2301a476883da0b10cde7e958329b074e5718"
+        },
+        {
+          "desc": "杨宁众筹姚小甲群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=ba189830a9870a119b2d1574ca0e4dc0bc227ba1a17d7a52c6c81cedeb3a433f"
+        },
+        {
+          "desc": "杨宁鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=8790d0c8503c268c5b4a0a3991749c3914c9f5ae7111d4e2c34f752a14d7fd84"
+        },
+        {
+          "desc": "杨宁 - 布丁群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=52a7f473c89ba84fa87a12a987bc44a0d184b16744ca6e8fb3b02a0b13756fc4"
+        }
+      ]
+    },
+    {
+      "name": "旗帜鲜明马老师",
+      "webhooks": [
+        {
+          "desc": "旗帜鲜明马老师众筹姚小甲群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=090e2dc034c2b0045a43ea0189f5004e7d6168418949d9c4fee1758272080446"
+        },
+        {
+          "desc": "上货：喜、薛、马、招、梅",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7dc7133f67ba25553a8f05b6e668f30d272c3ad52883451cb8b5b444bc6a77c0"
+        },
+        {
+          "desc": "旗帜马老师众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=45ffe7dc6b0627b1308bc61c44ba88b1ab8640781299d59b3c95febf37a6a5b6"
+        },
+        {
+          "desc": "旗帜马老师众筹刘飞飞群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=62988151d5106f85f21e92ab04173aa9c5844267617e3b1699f1af33e68995a9"
+        },
+        {
+          "desc": "马老师 - 布丁1群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7a4afe1591917f13912c563110cfc50aff19786cbaa0038140250d122e5c891d"
+        },
+        {
+          "desc": "马老师 - 布丁2群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=81a951360ecf1bccb93e00502426b2a39834b01204de28cf9635c100cd98907a"
+        },
+        {
+          "desc": "旗帜马老师众筹雪雪群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=9aac98b3bafee5432b269d274306c91d3ece491847a5f2c53684650d2ed4d3cb"
+        },
+        {
+          "desc": "老马旗帜鲜明鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=6ba9a8860b23fc3873f8f330d456e294a93d942fba2d1f7d331d7918ca4fadd1"
+        }
+      ]
+    },
+    {
+      "name": "喜学财经",
+      "webhooks": [
+        {
+          "desc": "上货：喜、薛、马、招、梅",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7dc7133f67ba25553a8f05b6e668f30d272c3ad52883451cb8b5b444bc6a77c0"
+        },
+        {
+          "desc": "喜学众筹刘飞飞群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=cdf572a96f1528e90c9be6d0f6ad77fcb36c8e593c6a604a317b4635e9614855"
+        },
+        {
+          "desc": "喜学众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=bb0b2502ea651695ef720ffaa9ffc8b3df7505e542b14f3ee482f73e4ce49c3c"
+        },
+        {
+          "desc": "喜学 - 布丁群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=5f2ccea33fe7393491e390f07f3379be3fb452c6f9f87fb654eddf339a598967"
+        }
+      ]
+    },
+    {
+      "name": "薛松",
+      "webhooks": [
+        {
+          "desc": "上货：喜、薛、马、招、梅",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7dc7133f67ba25553a8f05b6e668f30d272c3ad52883451cb8b5b444bc6a77c0"
+        },
+        {
+          "desc": "薛松众筹刘飞飞群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=3016fdc3698679ceaeb0152f0ae514ddb77a2bed08663f3d7ab4c93c5fdf156d"
+        },
+        {
+          "desc": "薛松众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=690c3060ada285896657b41d2c5771518de000d39157c90259e9538387ce1a1f"
+        },
+        {
+          "desc": "薛松 - 布丁群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=4825ea0d3333ef7a105dd6c3ddf6d8bf0853aff0d9f5074e350962cc3296bd46"
+        },
+        {
+          "desc": "薛松众筹姚小甲群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=6722bc42ca9aaa73df7f8470bd17baf67b7440fa84dd126664bba8d258092d99"
+        },
+        {
+          "desc": "薛松鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=0fcadb8679a891aabd458bf1872e25b26db1fefe7f12d4a55cf485c377ab1545"
+        }
+      ]
+    },
+    {
+      "name": "招财大师姐",
+      "webhooks": [
+        {
+          "desc": "上货：喜、薛、马、招、梅",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7dc7133f67ba25553a8f05b6e668f30d272c3ad52883451cb8b5b444bc6a77c0"
+        },
+        {
+          "desc": "招财大师姐众筹刘飞飞群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=4507a2d5713b8d55ff99efa3c5a93e2e200c2d6fd3fd38694ce1a6f205136940"
+        },
+        {
+          "desc": "招财大师姐众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=4507a2d5713b8d55ff99efa3c5a93e2e200c2d6fd3fd38694ce1a6f205136940"
+        }
+      ]
+    },
+    {
+      "name": "李一恩",
+      "webhooks": [
+        {
+          "desc": "上货：李、杨",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=f0010ce7b66614b0439746079dc2301a476883da0b10cde7e958329b074e5718"
+        },
+        {
+          "desc": "李一恩众筹姚小甲群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=3102ff0d5bbebe7650080cccd7aa57ff14664ba168fbafb461d4dab8efcbe7bf"
+        },
+        {
+          "desc": "李一恩众筹刘飞飞群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=a27c3edea9b27af7a3c6baca9e1ded278f1bab678c671c066f5cf36dfbc66a8d"
+        },
+        {
+          "desc": "李一恩众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=729e8476c94aabdacec7c85649c43df264b73583366d5ca570c1d09a381215b1"
+        },
+        {
+          "desc": "李一恩鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=74ec52f05d99241bf33915a445f0bf591284d9eade468c2cd058b984b1fc6b3c"
+        }
+      ]
+    },
+    {
+      "name": "价值十一年",
+      "webhooks": [
+        {
+          "desc": "价值十一年众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=364e0a6d2b2fbd42975a506e692047439431855832a287c68d31bf0b51f1eb81"
+        },
+        {
+          "desc": "价值十一年鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=898e9d5bf078dab26ab6b546831f1934337b12f33626be4470ae54bc88a3a4e7"
+        }
+      ]
+    },
+    {
+      "name": "梅森投研",
+      "webhooks": [
+        {
+          "desc": "梅森投研众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7c906189127842842fc54e89cc7a252178efa505c163593bd13e52cb52bf4312"
+        },
+        {
+          "desc": "梅森鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=5ba8a71495a4318f77e5474d522eccb9e32cf8fb4e2db9a7e7240cb71f274f77"
+        }
+      ]
+    },
+    {
+      "name": "测试条目",
+      "webhooks": [
+        {
+          "desc": "测试条目",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=4ae4322c3283a80f2c6a277c46a6e31a90b056b560dbb4001c8c6881f3d45eb0"
+        }
+      ]
+    }
+  ]
+}
