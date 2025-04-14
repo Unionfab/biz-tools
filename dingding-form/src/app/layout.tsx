@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Skeleton, Spin } from "antd";
 import theme from "../config/themeConfig";
 import "./globals.css";
 
@@ -18,8 +18,49 @@ export default function RootLayouchildrent({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <style>{`
+          .app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #2C3A4F;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+          }
+        `}</style>
+      </head>
       <body>
-        <ConfigProvider theme={theme}>{children}</ConfigProvider>
+        <ConfigProvider theme={theme}>
+          <div id="app-loading" className="app-loading">
+            <Skeleton style={{ width: "80%" }} title active />
+          </div>
+          {children}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              // return;
+            // 页面完全加载后隐藏加载指示器
+            window.onload = function() {
+              setTimeout(function() {
+                var loader = document.getElementById('app-loading');
+                if (loader) {
+                  loader.style.opacity = '0';
+                  setTimeout(function() {
+                    loader.style.display = 'none';
+                  }, 500);
+                }
+              }, 300);
+            }
+          `,
+            }}
+          />
+        </ConfigProvider>
       </body>
     </html>
   );

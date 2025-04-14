@@ -20,6 +20,10 @@
           "src": "https://oapi.dingtalk.com/robot/send?access_token=ba189830a9870a119b2d1574ca0e4dc0bc227ba1a17d7a52c6c81cedeb3a433f"
         },
         {
+          "desc": "杨宁众筹姚小乙群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=5ed175479950affacc2d526d3deff761270e06582ca1387aa1783d918fc0a6ec"
+        },
+        {
           "desc": "杨宁鹿众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=8790d0c8503c268c5b4a0a3991749c3914c9f5ae7111d4e2c34f752a14d7fd84"
         },

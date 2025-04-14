@@ -16,9 +16,10 @@ import {
   Input,
   message,
   Skeleton,
+  Spin,
   Upload,
 } from "antd";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import type { UploadFile } from "antd/es/upload/interface";
 import { uploadToQiniu, validateFile } from "@/utils/qiniuUpload";
 import {
@@ -26,6 +27,7 @@ import {
   getTeacherWebhooks,
   batchSendMarkdownMessage,
 } from "@/utils/dingTalkService";
+import config from "@/config/webhookConfig.json";
 
 interface Config {
   teacher: {
@@ -42,7 +44,9 @@ const queryClient = new QueryClient();
 export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
-      <FormContent />
+      <Suspense fallback={<Spin size="large" tip="加载中..." />}>
+        <FormContent />
+      </Suspense>
     </QueryClientProvider>
   );
 }
@@ -52,24 +56,24 @@ const FormContent = () => {
   const [uploading, setUploading] = useState(false);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  const { data: config, isLoading } = useQuery({
-    queryKey: ["config"],
-    retry: 3,
-    queryFn: async () => {
-      const qiniuUrl = process.env.NEXT_PUBLIC_QINIU_CONFIG_RESOURCE_URL;
-      const configPath = process.env.NEXT_PUBLIC_CONFIG_PATH;
+  // const { data: config, isLoading } = useQuery({
+  //   queryKey: ["config"],
+  //   retry: 3,
+  //   queryFn: async () => {
+  //     const qiniuUrl = process.env.NEXT_PUBLIC_QINIU_CONFIG_RESOURCE_URL;
+  //     const configPath = process.env.NEXT_PUBLIC_CONFIG_PATH;
 
-      if (!qiniuUrl || !configPath) throw new Error("配置URL或路径未设置");
+  //     if (!qiniuUrl || !configPath) throw new Error("配置URL或路径未设置");
 
-      const response = await fetch(qiniuUrl + configPath);
+  //     const response = await fetch(qiniuUrl + configPath);
 
-      return (await response.json()) as Config;
-    },
-    onError: (error) => {
-      message.error("配置加载失败");
-      console.error(error);
-    },
-  });
+  //     return (await response.json()) as Config;
+  //   },
+  //   onError: (error) => {
+  //     message.error("配置加载失败");
+  //     console.error(error);
+  //   },
+  // });
 
   const sendMessageMutation = useMutation({
     mutationFn: async () => {
@@ -145,7 +149,7 @@ const FormContent = () => {
         转发助手
       </Title>
 
-      {isLoading || !config ? (
+      {!config ? (
         <Skeleton title={{ width: "50%" }} active paragraph={{ rows: 4 }} />
       ) : (
         <Form
@@ -161,7 +165,6 @@ const FormContent = () => {
                 label: t.name || "",
                 value: t.name,
               }))}
-              loading={isLoading}
             />
           </Form.Item>
           <Form.Item name="message" label="消息内容">
