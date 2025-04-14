@@ -134,6 +134,10 @@
         {
           "desc": "招财大师姐众筹元元群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=4507a2d5713b8d55ff99efa3c5a93e2e200c2d6fd3fd38694ce1a6f205136940"
+        },
+        {
+          "desc": "招财大师姐鹿众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=2b8a334ce14220cd4d26bd5a730a6d088bd3bbcad55c9016ac2b3741d95e7973"
         }
       ]
     },
