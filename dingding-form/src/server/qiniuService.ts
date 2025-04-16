@@ -25,7 +25,7 @@ export class QiniuService {
   generateUploadToken() {
     const putPolicy = new qiniu.rs.PutPolicy({
       scope: this.bucket,
-      expires: 7200, // token有效期2小时
+      expires: 3600 * 24, // token有效期24小时
     });
 
     const uploadToken = putPolicy.uploadToken(this.mac);
