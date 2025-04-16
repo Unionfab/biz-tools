@@ -33,7 +33,6 @@ export const uploadToQiniu = (file: RcFile): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     try {
       // 获取上传凭证
-      const { token } = await getQiniuToken();
 
       // 生成文件key
       const key = `images/${Date.now()}-${file.name.replace(/\s+/g, "")}`;
@@ -42,7 +41,11 @@ export const uploadToQiniu = (file: RcFile): Promise<string> => {
       const task = qiniu.createDirectUploadTask(
         { type: "file", data: file, key: key },
         {
-          tokenProvider: async () => token,
+          tokenProvider: async () => {
+            const { token } = await getQiniuToken();
+
+            return token;
+          },
         }
       );
 
