@@ -90,9 +90,11 @@ const FormContent = () => {
       if (!!webhooks && (webhooks || []).length > 0) {
         const uploadUrls = await handleSubmit();
 
+        console.log("value.urls", value.urls);
+
         const finalUrls = (uploadUrls || [])
           .concat(
-            (value.urls || [])
+            (value.urls || "")
               .replace(/\s+/g, "") // 移除所有换行符
               .split(";")
           )
