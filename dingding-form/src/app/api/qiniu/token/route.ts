@@ -9,12 +9,12 @@ export async function GET() {
     const response = NextResponse.json(tokenInfo);
 
     // 设置不缓存的响应头
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate"
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
+    // response.headers.set(
+    //   "Cache-Control",
+    //   "no-store, no-cache, must-revalidate, proxy-revalidate"
+    // );
+    // response.headers.set("Pragma", "no-cache");
+    // response.headers.set("Expires", "0");
 
     return response;
   } catch (error) {
