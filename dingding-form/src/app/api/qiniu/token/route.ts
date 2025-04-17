@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { QiniuService } from "@/server/qiniuService";
 
-export async function GET() {
+export async function POST() {
   try {
     const qiniuService = new QiniuService();
     const tokenInfo = qiniuService.generateUploadToken();
@@ -9,16 +9,21 @@ export async function GET() {
     const response = NextResponse.json(tokenInfo);
 
     // 设置不缓存的响应头
-    // response.headers.set(
-    //   "Cache-Control",
-    //   "no-store, no-cache, must-revalidate, proxy-revalidate"
-    // );
-    // response.headers.set("Pragma", "no-cache");
-    // response.headers.set("Expires", "0");
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
 
     return response;
   } catch (error) {
     console.error("生成七牛云token失败:", error);
     return NextResponse.json({ error: "生成上传凭证失败" }, { status: 500 });
   }
+}
+
+// 保留GET方法以向后兼容
+export async function GET() {
+  return POST();
 }

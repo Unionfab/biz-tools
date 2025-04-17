@@ -34,8 +34,10 @@ const getQiniuToken = async (): Promise<QiniuToken> => {
   try {
     // 添加随机参数，防止缓存token
     const response = await fetch(`/api/qiniu/token?t=${Date.now()}`, {
+      method: "POST",
       cache: "no-store",
       headers: {
+        "Content-Type": "application/json",
         "Cache-Control": "no-cache, no-store, must-revalidate",
         Pragma: "no-cache",
         Expires: "0",
