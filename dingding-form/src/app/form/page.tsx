@@ -19,9 +19,13 @@ import {
   Spin,
   Upload,
 } from "antd";
-import { useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import type { UploadFile } from "antd/es/upload/interface";
-import { uploadToQiniu, validateFile } from "@/utils/qiniuUpload";
+import {
+  uploadToQiniu,
+  getServerTime,
+  validateFile,
+} from "@/utils/qiniuUpload";
 import {
   createImageMarkdown,
   getTeacherWebhooks,
@@ -84,12 +88,16 @@ const FormContent = () => {
       const webhooks = getTeacherWebhooks(config, value.teacher);
 
       if (!!webhooks && (webhooks || []).length > 0) {
-        const urls = await handleSubmit();
+        const uploadUrls = await handleSubmit();
+
+        const finalUrls = (uploadUrls || [])
+          .concat(value.urls)
+          .filter((u) => !!u);
 
         const md = createImageMarkdown(
           `招财转运 【${value.teacher}】 老师消息来啦`,
           value.message,
-          (urls || []).filter((u) => !!u)
+          finalUrls
         );
 
         batchSendMarkdownMessage(webhooks, "招财转运", md);
@@ -152,12 +160,7 @@ const FormContent = () => {
       {!config ? (
         <Skeleton title={{ width: "50%" }} active paragraph={{ rows: 4 }} />
       ) : (
-        <Form
-          form={form}
-          layout="vertical"
-          style={{ width: "100%" }}
-          onFinish={handleSubmit}
-        >
+        <Form form={form} layout="vertical" style={{ width: "100%" }}>
           <Form.Item name="teacher" label="投顾老师">
             <Select
               allowClear
@@ -168,6 +171,9 @@ const FormContent = () => {
             />
           </Form.Item>
           <Form.Item name="message" label="消息内容">
+            <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
+          </Form.Item>
+          <Form.Item label="图片链接" name="urls">
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
           <Form.Item label="上传图片" name="images">

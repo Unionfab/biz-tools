@@ -7,6 +7,26 @@ interface QiniuToken {
   domain: string;
 }
 
+// 在任何客户端组件中
+export const getServerTime = async () => {
+  try {
+    const response = await fetch("/api/qiniu/serverTime");
+    if (!response.ok) {
+      throw new Error("获取服务器时间失败");
+    }
+    const data = await response.json();
+    console.log("服务器时间:", data.time);
+    console.log("服务器时间戳:", data.timestamp);
+    console.log("本地时间:", new Date().toISOString());
+    console.log("时间差(毫秒):", data.timestamp - Date.now());
+
+    return data;
+  } catch (error) {
+    console.error("获取服务器时间失败:", error);
+    return null;
+  }
+};
+
 /**
  * 获取上传凭证
  */
