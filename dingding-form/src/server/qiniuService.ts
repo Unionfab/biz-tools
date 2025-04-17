@@ -32,7 +32,8 @@ export class QiniuService {
 
     return {
       token: uploadToken,
-      domain: this.domain,
+      // 添加时间戳确保每次返回不同的对象
+      timestamp: Date.now(),
     };
   }
 }

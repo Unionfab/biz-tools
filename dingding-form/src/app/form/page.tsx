@@ -91,7 +91,11 @@ const FormContent = () => {
         const uploadUrls = await handleSubmit();
 
         const finalUrls = (uploadUrls || [])
-          .concat(value.urls)
+          .concat(
+            (value.urls || [])
+              .replace(/\s+/g, "") // 移除所有换行符
+              .split(";")
+          )
           .filter((u) => !!u);
 
         const md = createImageMarkdown(
@@ -173,7 +177,21 @@ const FormContent = () => {
           <Form.Item name="message" label="消息内容">
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
-          <Form.Item label="图片链接" name="urls">
+          <Form.Item
+            label={
+              <div>
+                <span>图片链接（ ; 分隔可支持多张图片）</span>
+                <Button
+                  type="link"
+                  href="https://www.superbed.cn/"
+                  target="_blank"
+                >
+                  点击跳转图床
+                </Button>
+              </div>
+            }
+            name="urls"
+          >
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
           <Form.Item label="上传图片" name="images">

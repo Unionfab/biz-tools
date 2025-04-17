@@ -32,7 +32,8 @@ export const getServerTime = async () => {
  */
 const getQiniuToken = async (): Promise<QiniuToken> => {
   try {
-    const response = await fetch("/api/qiniu/token");
+    // 添加随机参数，防止缓存token
+    const response = await fetch(`/api/qiniu/token?t=${Date.now()}`);
 
     if (!response.ok) {
       throw new Error("获取上传凭证失败");
