@@ -39,18 +39,18 @@ echo "Processing started at $(date)" >"$LOG_FILE"
 # 在脚本开头添加环境检测函数
 detect_os() {
     case "$(uname -s)" in
-        Darwin*)
-            echo "macos"
-            ;;
-        Linux*)
-            echo "linux"
-            ;;
-        MINGW*|MSYS*|CYGWIN*)
-            echo "windows"
-            ;;
-        *)
-            echo "unknown"
-            ;;
+    Darwin*)
+        echo "macos"
+        ;;
+    Linux*)
+        echo "linux"
+        ;;
+    MINGW* | MSYS* | CYGWIN*)
+        echo "windows"
+        ;;
+    *)
+        echo "unknown"
+        ;;
     esac
 }
 
@@ -58,20 +58,20 @@ detect_os() {
 get_font_path() {
     local os_type=$(detect_os)
     case "$os_type" in
-        macos)
-            echo "/System/Library/Fonts/PingFang.ttc"
-            ;;
-        windows)
-            echo "C\\:/Windows/Fonts/msyh.ttc"
-            ;;
-        linux)
-            # Linux 系统可能需要根据实际安装的字体修改
-            echo "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-            ;;
-        *)
-            echo "Error: Unsupported operating system"
-            exit 1
-            ;;
+    macos)
+        echo "/System/Library/Fonts/PingFang.ttc"
+        ;;
+    windows)
+        echo "C\\:/Windows/Fonts/msyh.ttc"
+        ;;
+    linux)
+        # Linux 系统可能需要根据实际安装的字体修改
+        echo "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ;;
+    *)
+        echo "Error: Unsupported operating system"
+        exit 1
+        ;;
     esac
 }
 
