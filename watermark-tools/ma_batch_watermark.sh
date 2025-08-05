@@ -68,7 +68,11 @@ for CODE_IDX in "${!CODES[@]}"; do
         IDX=$((IDX + 1))
         BASENAME=$(basename "$VID")
         PADDED_IDX=$(printf "%02d" "$IDX")
-        OUTFILE="$OUT_DIR/${PADDED_IDX}_$BASENAME"
+        # 提取文件名和扩展名
+        FILENAME="${BASENAME%.*}"
+        EXTENSION="${BASENAME##*.}"
+        # 在扩展名前添加随机码
+        OUTFILE="$OUT_DIR/${PADDED_IDX}_${FILENAME}_${CODE}.${EXTENSION}"
         echo "[$IDX/$FILE_COUNT] 正在处理: $BASENAME"
         # 获取视频时长
         DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$VID")
