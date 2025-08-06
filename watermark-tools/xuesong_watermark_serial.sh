@@ -112,8 +112,19 @@ process_video() {
 
     # 获取视频总时长（秒）
     duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$input_file")
-    # 计算每个部分的时长
-    section_duration=$(echo "$duration / 3" | bc -l)
+
+    # 检查视频时长是否足够进行30秒切除
+    if (($(echo "$duration <= 30" | bc -l))); then
+        echo "Warning: Video duration ($duration seconds) is too short for 30-second trimming, skipping trim"
+        local trim_start=0
+    else
+        local trim_start=30
+        echo "Trimming first 30 seconds from video"
+    fi
+
+    # 计算每个部分的时长（基于切除后的时长）
+    local effective_duration=$(echo "$duration - $trim_start" | bc -l)
+    section_duration=$(echo "$effective_duration / 3" | bc -l)
 
     # 定义三个时间段的水印位置
     if [ "$WATERMARK_MODE" = "center" ]; then
@@ -121,6 +132,7 @@ process_video() {
         local font_path=$(get_font_path)
         ffmpeg -nostdin -hide_banner -loglevel error \
             -i "$input_file" \
+            -ss $trim_start \
             -vf "drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任；识别码 ${wxid}(${nickname})':fontfile='${font_path}':fontsize=16:fontcolor=white:alpha=1:x=(w-text_w)/2:y=(h-text_h)/2" \
             -c:v libx264 \
             -codec:a copy \
@@ -134,13 +146,13 @@ process_video() {
         # 左上角位置
         position3="x=10:y=10"
 
-        # 时间过滤器
+        # 时间过滤器（基于切除后的时间）
         time_filter1="lt(t,${section_duration})"
         time_filter2="gte(t,${section_duration})*lt(t,$(echo "$section_duration * 2" | bc))"
         time_filter3="gte(t,$(echo "$section_duration * 2" | bc))"
     else
-        # 仅最后一分钟显示水印
-        start_time=$(echo "$duration - 60" | bc)
+        # 仅最后一分钟显示水印（基于切除后的时长）
+        start_time=$(echo "$effective_duration - 60" | bc)
         if (($(echo "$start_time < 0" | bc -l))); then
             time_filter1="lt(t,20)"
             time_filter2="gte(t,20)*lt(t,40)"
@@ -157,6 +169,7 @@ process_video() {
 
     ffmpeg -nostdin -stats \
         -i "$input_file" \
+        -ss $trim_start \
         -vf "drawtext=text='该视频仅供 ${wxid} 学习，请勿二次传播或售卖，否则涉及到的法律责任将由 ${wxid} 承担':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position1}:enable='${time_filter1}',drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任：识别码 ${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position2}:enable='${time_filter2}',drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任\n微信号或 ID：${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position3}:enable='${time_filter3}'" \
         -c:v libx264 \
         -codec:a copy \
@@ -166,6 +179,7 @@ process_video() {
     local status=$?
     if [ $status -eq 0 ]; then
         echo "Success: $output_file"
+        echo "Original duration: ${duration}s, Trimmed duration: ${effective_duration}s"
     else
         echo "Error processing video: $input_file (exit code: $status)"
         echo "Check $LOG_FILE for details"
