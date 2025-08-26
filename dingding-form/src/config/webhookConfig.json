@@ -369,6 +369,19 @@
       ]
     },
     {
+      "name": "格兰投研",
+      "webhooks": [
+        {
+          "desc": "格兰投研众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=67cebcbafde7787ae4cd15df7e137f889b28643c1e95179a91cae8e7a4375ba0"
+        },
+        {
+          "desc": "格兰投研姚小姚众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=3beb2a117ef2d03513686044e681a1cbb7c6bc8af2c9ce2634d904bef08f08e3"
+        }
+      ]
+    },
+    {
       "name": "测试条目",
       "webhooks": [
         {
