@@ -339,6 +339,15 @@
       ]
     },
     {
+      "name": "长安大湿人",
+      "webhooks": [
+        {
+          "desc": "长安大湿人众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=e71fb98e4ee804d0d35a546a666d1caa23a3b2ebe35c62f7e68928068a5b7ac5"
+        }
+      ]
+    },
+    {
       "name": "测试条目",
       "webhooks": [
         {
