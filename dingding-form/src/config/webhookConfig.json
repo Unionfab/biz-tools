@@ -382,6 +382,15 @@
       ]
     },
     {
+      "name": "马克大马路",
+      "webhooks": [
+        {
+          "desc": "马克大马路众筹分享",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=50b9c70026e1e33075273ee9c119360c48dd1268fec6ac7a40287ad6d97bc405"
+        }
+      ]
+    },
+    {
       "name": "测试条目",
       "webhooks": [
         {
