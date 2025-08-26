@@ -30,6 +30,10 @@
         {
           "desc": "杨宁红红众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=44f435dbfbf78994ef57c2e6fbc94668f178ea020a12dbb08e08e8a4b9d091c7"
+        },
+        {
+          "desc": "杨宁众筹享享群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=b9688f893e3a80a935fc69e8ba5e65898b7bae4c0e826c52678cda16bf4e8257"
         }
       ]
     },
@@ -95,15 +99,19 @@
         {
           "desc": "旗帜鲜明马老师众筹恒恒群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=954c052566602f7f4d21de111ebbdc0e10ef42e2ebe274dfd12e91c8b3b62a62"
-      }
+        }
       ]
     },
     {
       "name": "喜学财经",
       "webhooks": [
         {
-          "desc": "喜学vip 分享群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=93ab3aed79d13313aedc7f76d4a31cb88c8de618acd89ff3f9c3e9696a8f6077"
+          "desc": "喜学 - 布丁群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=5f2ccea33fe7393491e390f07f3379be3fb452c6f9f87fb654eddf339a598967"
+        },
+        {
+          "desc": "喜学众筹喵喵群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=a5c4bc42000ad8bb916c2cf1cdae908b17fe20ebf885ab777675dc8020a8774a"
         }
       ]
     },
@@ -141,6 +149,14 @@
         {
           "desc": "薛松众筹恒恒群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=774e8b1e52be411e37c24472bc0fd440b39106f8d2d4a7cee104c6f8bac38c7b"
+        },
+        {
+          "desc": "薛松众筹群-菲",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=fa226c739458983a6f182cb61596c5fc40ee9f1414a5d6acde3744b489589cf2"
+        },
+        {
+          "desc": "薛松姚小姚众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=c620eb5ded2df12fe7309876bb0746cb1c8fb0c363a60d34b8344cd44cf8a8bc"
         }
       ]
     },
@@ -165,7 +181,7 @@
         },
         {
           "desc": "大师姐众筹元元群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=5c63743298bb2818cb015a8ebdb010713acfd3d45e61c3f3e3e1a736b2b97eb2"
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=03a209e9fad396a00144ab32ac528254201a9a289b3ca952f2470865c2a98424"
         },
         {
           "desc": "大师姐王爽招财众筹群",
@@ -190,6 +206,22 @@
         {
           "desc": "大师姐王爽众筹火火群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=c812876f746c063a37540e04c51f8e149da9d3aa10b1584cbba8000b58ea3084"
+        },
+        {
+          "desc": "大师姐众筹亨亨群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=c0c87b9a9bad2fe0f2c7f2f583180db1777c18d2a26d3dae3f94dfa33440e6a4"
+        },
+        {
+          "desc": "大师姐王爽红思众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=6f0e0f9d961ef1da475cd94df727d07ea4ba2fdf6f9fa24f3170a17774b2da72"
+        },
+        {
+          "desc": "大师姐姚小姚众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=d26680ff7c762134bf7d6dba9a324a0a75ffbaa8672ec15e02d76de2c3f6b404"
+        },
+        {
+          "desc": "大师姐众筹布丁不谏群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=186005e3bcfbd32e54b5c4858e5bb0756fd377485a47533113d8eac4f3bce24c"
         }
       ]
     },
@@ -239,8 +271,8 @@
           "src": "https://oapi.dingtalk.com/robot/send?access_token=5ba8a71495a4318f77e5474d522eccb9e32cf8fb4e2db9a7e7240cb71f274f77"
         },
         {
-          "desc": "梅森-布丁群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=0698afebda89d592ac065ea0140cab11bbb4d2f1409f1185dce14ac1fdf6af10"
+          "desc": "梅森红火众筹",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=a9ee989d884d503799b47c53a88b4c5d152cb7c4e1f628c8ee3aa811769f809c"
         }
       ]
     },
@@ -281,6 +313,28 @@
           "type": "important",
           "desc": "小龙女【重要消息】姚小甲众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=5ffdafb804ad3b678a77bf44f2c69a856dd53abd42e8d926e6a2218583784571"
+        }
+      ]
+    },
+    {
+      "name": "顶底之王",
+      "webhooks": [
+        {
+          "desc": "顶底之王众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=82ec949cdf40a7bd003d2354bd00cb95dc8a72bbd2e319ab6a93a494d82b47da"
+        }
+      ]
+    },
+    {
+      "name": "诸葛鲲鹏",
+      "webhooks": [
+        {
+          "desc": "诸葛鲲鹏众筹喵喵群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=13f4f26ecc10dc5b4408d605c77a40d2343b18551069355b1130425baa506014"
+        },
+        {
+          "desc": "诸葛鲲鹏姚小甲众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=66fa705fc406043a31759230eacad5dd97e8f78b8c13993a6e12376bb7ebc68a"
         }
       ]
     },
