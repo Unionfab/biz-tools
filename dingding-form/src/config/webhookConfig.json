@@ -317,6 +317,27 @@
       ]
     },
     {
+      "name": "万里",
+      "webhooks": [
+        {
+          "desc": "万里小鹿分享群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=e36d12735bf31b1644f3c1d79169bcb4f89620f65174fa3083275249e889d72c"
+        },
+        {
+          "desc": "万里消息菲菲分享群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=c00d2296b1d2856a9f0d9d6135069a139dde923fda366c420adcaa90ce41de43"
+        },
+        {
+          "desc": "万里菲菲分享群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=278e8f600894238503d3a6a77008f66914431ba10637f13ed2125e51d5174ead"
+        },
+        {
+          "desc": "万里红红众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=0a178aa081b9ebfb9d8932775ffba78431bc768210e871c4032f300960091263"
+        }
+      ]
+    },
+    {
       "name": "顶底之王",
       "webhooks": [
         {
