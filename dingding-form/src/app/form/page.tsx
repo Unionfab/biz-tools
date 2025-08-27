@@ -20,7 +20,7 @@ import {
   Upload,
 } from "antd";
 import { useEffect, useState, Suspense } from "react";
-import type { UploadFile } from "antd/es/upload/interface";
+import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 import {
   uploadToQiniu,
   getServerTime,
@@ -144,14 +144,23 @@ const FormContent = () => {
     }
   };
 
-  const uploadProps = {
+  const uploadProps: UploadProps = {
     fileList: fileList,
     onRemove: (file: UploadFile) => {
       setFileList(fileList.filter((f) => f.uid !== file.uid));
     },
-    beforeUpload: (file: UploadFile) => {
+    beforeUpload: (file: UploadFile, _fileList: UploadFile[]) => {
       if (validateFile(file as any)) {
-        setFileList([...fileList, file]);
+        // 使用函数式更新，确保状态更新正确
+        setFileList((prev) => {
+          // 检查是否已存在相同文件
+          const exists = prev.some((f) => f.uid === file.uid);
+
+          if (!exists) {
+            return [...prev, file];
+          }
+          return prev;
+        });
       }
       return false; // 阻止自动上传
     },
@@ -197,7 +206,7 @@ const FormContent = () => {
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
           <Form.Item label="上传图片" name="images">
-            <Upload accept="image/*" {...uploadProps}>
+            <Upload accept="image/*" multiple {...uploadProps}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>

@@ -125,7 +125,7 @@ export const validateFile = (file: RcFile): boolean => {
   // 验证文件大小（2MB）
   const isLt2M = file.size / 1024 / 1024 < 25;
   if (!isLt2M) {
-    message.error("图片大小不能超过 25MB!");
+    message.error(file.name + ":图片大小不能超过 25MB!");
     return false;
   }
 

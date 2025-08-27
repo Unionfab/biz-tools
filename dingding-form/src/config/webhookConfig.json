@@ -222,6 +222,10 @@
         {
           "desc": "大师姐众筹布丁不谏群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=186005e3bcfbd32e54b5c4858e5bb0756fd377485a47533113d8eac4f3bce24c"
+        },
+        {
+          "desc": "大师姐宝玉众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=b4d1ad9ec84c4594f4d74f15d1e9139d29809b8dcc52f0c6ea967bc1360118d7"
         }
       ]
     },
