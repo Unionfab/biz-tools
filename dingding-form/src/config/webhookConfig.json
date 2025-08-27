@@ -184,10 +184,6 @@
           "src": "https://oapi.dingtalk.com/robot/send?access_token=03a209e9fad396a00144ab32ac528254201a9a289b3ca952f2470865c2a98424"
         },
         {
-          "desc": "大师姐王爽招财众筹群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=68e77b2d2e3cf6d17a8a3a2b7374ca61a0155b3189c82615a5c7e7fce1847729"
-        },
-        {
           "desc": "大师姐王爽红红众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=66e508eb75ba303c78f2ecc342f8092d3ae65511d96b29c9bbb36cc3d89c8cc7"
         },
@@ -247,6 +243,10 @@
         {
           "desc": "李一恩红红众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=390c79c575a9debb4d24f92bfedd2955aec3974c5553f94d374589f0cc36e4c1"
+        },
+        {
+          "desc": "李一恩蛇蛇众筹群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=c06efc7da54823cafd7a97f856c66443863b09436f30ecb9a9654887687de143"
         }
       ]
     },
