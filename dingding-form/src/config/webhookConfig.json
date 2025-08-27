@@ -299,6 +299,11 @@
           "src": "https://oapi.dingtalk.com/robot/send?access_token=a002363158fd1a182083b63fa5c3e2c5f83df371d8e1526abefd6fc12596d14f"
         },
         {
+          "type": "normal",
+          "desc": "小龙女合和【试听】群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=e42b97a03c1c204489de5e49a288b11b8a1e7f9a54797e40305faac3a914325e"
+        },
+        {
           "type": "important",
           "desc": "小龙女【重要消息】合合众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=de886d4220bb38e8bbd7a423e8b57e490f248362c48b9b853c8ca2b0ddfd9f37"
@@ -382,6 +387,10 @@
         {
           "desc": "格兰投研姚小姚众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=3beb2a117ef2d03513686044e681a1cbb7c6bc8af2c9ce2634d904bef08f08e3"
+        },
+        {
+          "desc": "格兰投研众筹元元群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=9a2782df25417225d84178a5bf8212d3f915549f9f453dda4937567a8e932c48"
         }
       ]
     },
