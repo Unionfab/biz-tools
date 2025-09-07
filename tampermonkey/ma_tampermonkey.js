@@ -33,7 +33,7 @@ const CONFIG = {
   },
   TIME_RANGE: {
     START_HOUR: 8,
-    START_MINUTE: 30,
+    START_MINUTE: 15,
     END_HOUR: 16,
     END_MINUTE: 50,
     WEEKDAYS: [1, 2, 3, 4, 5], // 周一到周五
@@ -56,7 +56,8 @@ const getPostList = async () => {
         "sec-fetch-site": "same-site",
         referer: "https://h5.sass.zhuoshangsoft.com/",
       },
-      data: "teacher_code=3825633306&page=1&size=10&token=27c30828a1fd47040025a457fc8e2125",
+      // data: "teacher_code=3825633306&page=1&size=10&token=27c30828a1fd47040025a457fc8e2125",
+      data: "teacher_code=3825633306&page=1&size=10&last_id=&token=27c30828a1fd47040025a457fc8e2125&browserName=chrome&browserVersion=109.0.0.0&hostVersion=109.0.0.0&deviceModel=PC&deviceBrand=&osVersion=10^%^20x64&osName=windows&host=h5.sass.zhuoshangsoft.com&cid=&version_num=1.9.3&versionNums=193&downSource=update&env=prod&source=h5",
       onload: function (response) {
         try {
           const result = JSON.parse(response.responseText);
@@ -182,6 +183,15 @@ const getLocalPostFile = async () => {
       for (const post of postList) {
         if ((post?.secret_content || "").includes(CONFIG.SECRET_KEY)) {
           console.log(">>> 捕获到 vip 消息", post);
+
+          if ((post?.secret_content || "") == (post?.content || "")) {
+            console.log(">>> 登录过期");
+
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+            break;
+          }
 
           // 触发新消息检查
           await this.checkNewPosts(post);

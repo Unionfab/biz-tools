@@ -1,4 +1,5 @@
 import axios from "axios";
+import crypto from "crypto";
 
 interface DingTalkMessage {
   msgtype: string;
@@ -21,6 +22,22 @@ interface DingTalkMessage {
 interface Webhook {
   desc: string;
   src: string;
+  secret?: string;
+}
+
+function getSign(secret: string) {
+  const timestamp = Date.now();
+  const stringToSign = `${timestamp}\n${secret}`;
+
+  const sign = crypto
+    .createHmac("sha256", secret)
+    .update(stringToSign)
+    .digest("base64");
+
+  return {
+    timestamp,
+    sign: encodeURIComponent(sign),
+  };
 }
 
 /**
@@ -30,7 +47,7 @@ interface Webhook {
  * @returns Promise<boolean> 是否发送成功
  */
 export const sendTextMessage = async (
-  webhook: string,
+  webhook: Webhook,
   content: string
 ): Promise<boolean> => {
   const message: DingTalkMessage = {
@@ -51,7 +68,7 @@ export const sendTextMessage = async (
  * @returns Promise<boolean> 是否发送成功
  */
 export const sendMarkdownMessage = async (
-  webhook: string,
+  webhook: Webhook,
   title: string,
   text: string
 ): Promise<boolean> => {
@@ -76,7 +93,7 @@ export const sendMarkdownMessage = async (
  * @returns Promise<boolean> 是否发送成功
  */
 export const sendLinkMessage = async (
-  webhook: string,
+  webhook: Webhook,
   title: string,
   text: string,
   messageUrl: string,
@@ -146,13 +163,28 @@ export const createImageMarkdown = (
  * @returns Promise<boolean> 是否发送成功
  */
 const sendMessage = async (
-  webhook: string,
+  webhook: Webhook,
   message: DingTalkMessage
 ): Promise<boolean> => {
   try {
+    console.log("webhook", webhook);
+
+    let webhookSrc = webhook.src;
+
+    if (webhook?.secret) {
+      const { timestamp, sign } = getSign(webhook.secret);
+
+      console.log("timestamp", timestamp, sign);
+
+      webhookSrc = `${webhook.src}&timestamp=${timestamp}&sign=${sign}`;
+    }
+
     const response = await axios.post(
       "/api/dingTalk",
-      { webhook, message },
+      {
+        webhook: webhookSrc,
+        message,
+      },
       {
         headers: {
           "Content-Type": "application/json",
@@ -208,7 +240,7 @@ export const batchSendMarkdownMessage = async (
 
   await Promise.all(
     webhooks.map(async (webhook) => {
-      const result = await sendMarkdownMessage(webhook.src, title, text);
+      const result = await sendMarkdownMessage(webhook, title, text);
       if (result) {
         success++;
       } else {

@@ -13,8 +13,8 @@
 
 // 配置常量
 const CONFIG = {
-  REFRESH_INTERVAL: 60 * 30 * 1000, // 20s 监测一次
-  CHECK_INTERVAL: 30 * 1000,
+  REFRESH_INTERVAL: 60 * 30 * 1000,
+  CHECK_INTERVAL: 60 * 1000, // 60s 监测一次
   STORAGE_KEYS: {
     LAST_REFRESH: "lastRefreshDate",
     LAST_CHECK: "lastCheckDate",
@@ -30,6 +30,8 @@ const CONFIG = {
     UPDATE_FILE_PATH: {
       杨宁: "C:\\WorkSpace\\理财文件\\飞书\\update\\yangning.json",
       睿见视界: "C:\\WorkSpace\\理财文件\\飞书\\update\\ruijian.json",
+      梅森: "C:\\WorkSpace\\理财文件\\飞书\\update\\meisen.json",
+      大爷周: "C:\\WorkSpace\\理财文件\\飞书\\update\\dayezhou.json",
     },
   },
   TIME_RANGE: {
@@ -319,9 +321,17 @@ const getLocalPostFile = async (feedType) => {
             lastPost?.杨宁?.content || "无"
           }</h4>
           <div style="margin: 8px 0; border-bottom:1px solid white"></div>
-             <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【睿见视界】：${
-               lastPost?.睿见视界?.content || "无"
-             }</h4>
+          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【睿见视界】：${
+            lastPost?.睿见视界?.content || "无"
+          }</h4>
+          <div style="margin: 8px 0; border-bottom:1px solid white"></div>
+          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【梅森】：${
+            lastPost?.梅森?.content || "无"
+          }</h4>
+          <div style="margin: 8px 0; border-bottom:1px solid white"></div>
+          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【大爷周】：${
+            lastPost?.大爷周?.content || "无"
+          }</h4>
         </div>
       </div>
     `;
@@ -350,6 +360,14 @@ const getLocalPostFile = async (feedType) => {
       } else if (feedType == "杨宁") {
         element = document.querySelector(
           '[data-feed-id="7458115569351426076"]'
+        );
+      } else if (feedType == "梅森") {
+        element = document.querySelector(
+          '[data-feed-id="7545426336593674259"]'
+        );
+      } else if (feedType == "大爷周") {
+        element = document.querySelector(
+          '[data-feed-id="7530465638810075155"]'
         );
       }
 
@@ -442,10 +460,14 @@ const getLocalPostFile = async (feedType) => {
 
         const targetPosts1 = await this.checkNewPosts("杨宁");
         const targetPosts2 = await this.checkNewPosts("睿见视界");
+        const targetPosts3 = await this.checkNewPosts("梅森");
+        const targetPosts4 = await this.checkNewPosts("大爷周");
 
         try {
           await this.messageHandler.sendToServer("杨宁", targetPosts1);
           await this.messageHandler.sendToServer("睿见视界", targetPosts2);
+          await this.messageHandler.sendToServer("梅森", targetPosts3);
+          await this.messageHandler.sendToServer("大爷周", targetPosts4);
         } catch (error) {
           console.error("发送消息失败:", error);
         }

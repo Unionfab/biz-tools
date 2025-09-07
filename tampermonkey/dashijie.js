@@ -5,6 +5,7 @@
 // @description  监控大师姐消息并转发到本地服务
 // @author       You
 // @run-at       document-start
+// @match        https://quanzi.xiaoe-tech.com/c_682d3c3d4846b_kL9SkQTQ8534/feed_list?community_id=c_682d3c3d4846b_kL9SkQTQ8534&share_type=12&share_type=12&app_id=appjazj4wya3911&share_user_id=
 // @match        https://quanzi.xiaoe-tech.com/*/feed_list?app_id=*
 // @match        https://quanzi.xiaoe-tech.com/sign_in?*
 // @match        https://quanzi.xiaoe-tech.com/sign_in
@@ -36,7 +37,7 @@ const CONFIG = {
   },
   TIME_RANGE: {
     START_HOUR: 8,
-    START_MINUTE: 30,
+    START_MINUTE: 10,
     END_HOUR: 18,
     END_MINUTE: 30,
     WEEKDAYS: [1, 2, 3, 4, 5], // 周一到周五
