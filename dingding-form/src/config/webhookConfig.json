@@ -259,14 +259,6 @@
         {
           "desc": "大师姐众筹闪闪群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=b4d1ad9ec84c4594f4d74f15d1e9139d29809b8dcc52f0c6ea967bc1360118d7"
-        },
-        {
-          "desc": "大师姐王爽呵呵众筹群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=dada45f5d86b300bb9b5e5e7f83bc4ff3de4f9440ddd037ebc251e420a1320d4"
-        },
-        {
-          "desc": "大师姐王爽哈哈众筹群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=a6572b67b6489cfebbf33acfbfca55b91cb6ecbb5f727431504b7613b3fe5ee5"
         }
       ]
     },
