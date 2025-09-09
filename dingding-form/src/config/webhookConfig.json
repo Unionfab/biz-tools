@@ -49,10 +49,6 @@
       "name": "旗帜鲜明马老师",
       "webhooks": [
         {
-          "desc": "马老师永义众筹群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=5a00ad18fcd0aa70c7718e419bfb587834143302f0e143e7cd82dc0518eb3c3d"
-        },
-        {
           "desc": "旗帜鲜明马老师众筹姚小甲群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=090e2dc034c2b0045a43ea0189f5004e7d6168418949d9c4fee1758272080446"
         },
@@ -123,6 +119,11 @@
         {
           "desc": "旗帜马老师发发众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=67eabd22437e5c7eda07604f339d727b8e56ed925e9619b44a1ebbbcd7bcdb8b"
+        },
+        {
+          "desc": "旗帜鲜明马老师永义群",
+          "secret": "SEC32f08078817a5860d630e6f355f5ac35eda309e946a2500ff7ea4dbf084d253c",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=bb5778c336fe7c09c834d3c0d7c118c6d8b04e268b67e0623a275dfa0be5c158"
         }
       ]
     },
@@ -346,7 +347,8 @@
         {
           "type": "normal",
           "desc": "小龙女合和【试听】群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=e42b97a03c1c204489de5e49a288b11b8a1e7f9a54797e40305faac3a914325e"
+          "secret": "SEC3ec84f35c7846fb35083f98d9a22d249ca64b906e2afd47033b98197cdf9c8e8",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=0bf7214214b3fdf71bbb314e3e74e67027c6c88f240381f01f3b6a20ce0d7124"
         },
         {
           "type": "normal",
@@ -457,10 +459,6 @@
           "src": "https://oapi.dingtalk.com/robot/send?access_token=3beb2a117ef2d03513686044e681a1cbb7c6bc8af2c9ce2634d904bef08f08e3"
         },
         {
-          "desc": "格兰投研众筹元元群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=9a2782df25417225d84178a5bf8212d3f915549f9f453dda4937567a8e932c48"
-        },
-        {
           "desc": "格老师众筹红火群",
           "secret": "SEC71ae5acf48659fbfa4a1cfa06164028e2d30d593ff45947e12d9710d309528c1",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=8b1729b88360e09c8841cf2392b99442d34407e8e48d674bec7738163e818675"
@@ -485,8 +483,9 @@
       "name": "大爷周",
       "webhooks": [
         {
-          "desc": "邻居大爷永义红火群",
-          "src": "https://oapi.dingtalk.com/robot/send?access_token=1a4919b0019b9a3bd5e5b1850d038086c57ce8f6ed437abb6dfafc5e76ea44e9"
+          "desc": "邻居大爷永义红红火火群",
+          "secret": "SEC4d3e4845f1dfaaaaccdcaccc199f5a4ecb313968976aaa9bafd97086e35bf0c7",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=cd4720291c2f1400e0767dc05bb40698c20566a2619b70deb154cbd7af323c45"
         }
       ]
     },
