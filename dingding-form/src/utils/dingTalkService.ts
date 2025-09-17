@@ -139,17 +139,30 @@ function wrapLinks(text: string) {
  * @param imageUrls 图片URL数组
  * @returns Promise<boolean> 是否发送成功
  */
-export const createImageMarkdown = (
-  title: string,
-  text: string,
-  imageUrls: string[]
-): string => {
+export const createImageMarkdown = ({
+  title,
+  text,
+  imageUrls,
+  fileUrls,
+}: {
+  title: string;
+  text: string;
+  fileUrls?: Record<"url" | "filename", string>[];
+  imageUrls?: Record<"url" | "filename", string>[];
+}): string => {
   let markdownText = `### ${title}\n\n${wrapLinks(text)}\n\n`;
 
   // 添加图片
   if (imageUrls && imageUrls.length > 0) {
-    imageUrls.forEach((url) => {
-      markdownText += `![图片](${url})\n`;
+    imageUrls.forEach(({ url, filename }) => {
+      markdownText += `![${filename}](${url})\n`;
+    });
+  }
+
+  // 添加文件
+  if (fileUrls && fileUrls.length > 0) {
+    fileUrls.forEach(({ url, filename }) => {
+      markdownText += `[${filename}(请及时下载保存)](${url})\n`;
     });
   }
 

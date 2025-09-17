@@ -23,8 +23,8 @@ import { useEffect, useState, Suspense } from "react";
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 import {
   uploadToQiniu,
-  getServerTime,
   validateFile,
+  validateImage,
 } from "@/utils/qiniuUpload";
 import {
   createImageMarkdown,
@@ -59,6 +59,7 @@ const FormContent = () => {
   const [form] = Form.useForm();
   const [uploading, setUploading] = useState(false);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [imageFileList, setImageFileList] = useState<UploadFile[]>([]);
 
   // const { data: config, isLoading } = useQuery({
   //   queryKey: ["config"],
@@ -88,23 +89,34 @@ const FormContent = () => {
       const webhooks = getTeacherWebhooks(config, value.teacher);
 
       if (!!webhooks && (webhooks || []).length > 0) {
-        const uploadUrls = await handleSubmit();
+        const { fileUrls, imageUrls } = await handleSubmit();
 
         console.log("value.urls", value.urls);
 
-        const finalUrls = (uploadUrls || [])
-          .concat(
-            (value.urls || "")
-              .replace(/\s+/g, "") // 移除所有换行符
-              .split(";")
-          )
-          .filter((u) => !!u);
+        // const finalFileUrls = (fileUrls || [])
+        //   .concat(
+        //     (value.urls || "")
+        //       .replace(/\s+/g, "") // 移除所有换行符
+        //       .split(";")
+        //   )
+        //   .filter((u) => !!u?.url);
 
-        const md = createImageMarkdown(
-          `招财转运 【${value.teacher}】 老师消息来啦`,
-          value.message,
-          finalUrls
-        );
+        // const finalImageUrls = (imageUrls || [])
+        //   .concat(
+        //     (value.urls || "")
+        //       .replace(/\s+/g, "") // 移除所有换行符
+        //       .split(";")
+        //   )
+        //   .filter((u) => !!u?.url);
+
+        const md = createImageMarkdown({
+          title: `招财转运 【${value.teacher}】 老师消息来啦`,
+          text: value.message,
+          imageUrls,
+          fileUrls,
+        });
+
+        console.log("md", md);
 
         batchSendMarkdownMessage(webhooks, "招财转运", md);
       }
@@ -121,26 +133,48 @@ const FormContent = () => {
   });
 
   const handleSubmit = async () => {
-    if (fileList.length > 0) {
-      try {
-        console.log("start upload", fileList);
+    let imageUrls: Record<"url" | "filename", string>[] = [];
+    let fileUrls: Record<"url" | "filename", string>[] = [];
 
-        // 上传所有文件并获取URL
-        const uploadPromises = fileList.map(async (file) => {
+    try {
+      console.log("start upload", fileList);
+
+      if (imageFileList.length > 0) {
+        // 上传所有图片并获取URL
+        const imageUploadPromises = imageFileList.map(async (file) => {
           const url = await uploadToQiniu(file as any);
 
           if (!url) {
             throw new Error("上传失败");
           }
 
-          return url;
+          return { url, filename: file.name };
         });
 
-        return await Promise.all(uploadPromises);
-      } catch (error) {
-        console.error("上传失败:", error);
-        message.error("上传失败，请重试！");
+        imageUrls = await Promise.all(imageUploadPromises);
       }
+
+      if (fileList.length > 0) {
+        // 上传所有文件并获取URL
+        const fileUploadPromises = fileList.map(async (file) => {
+          const url = await uploadToQiniu(file as any);
+
+          if (!url) {
+            throw new Error("上传失败");
+          }
+
+          return { url, filename: file.name };
+        });
+
+        fileUrls = await Promise.all(fileUploadPromises);
+      }
+
+      return { fileUrls, imageUrls };
+    } catch (error) {
+      return { fileUrls, imageUrls };
+
+      console.error("上传失败:", error);
+      message.error("上传失败，请重试！");
     }
   };
 
@@ -151,8 +185,32 @@ const FormContent = () => {
     },
     beforeUpload: (file: UploadFile, _fileList: UploadFile[]) => {
       if (validateFile(file as any)) {
+        console.log("file", file);
+
         // 使用函数式更新，确保状态更新正确
         setFileList((prev) => {
+          // 检查是否已存在相同文件
+          const exists = prev.some((f) => f.uid === file.uid);
+
+          if (!exists) {
+            return [...prev, file];
+          }
+          return prev;
+        });
+      }
+      return false; // 阻止自动上传
+    },
+  };
+
+  const imageUploadProps: UploadProps = {
+    fileList: imageFileList,
+    onRemove: (file: UploadFile) => {
+      setImageFileList(imageFileList.filter((f) => f.uid !== file.uid));
+    },
+    beforeUpload: (file: UploadFile, _fileList: UploadFile[]) => {
+      if (validateImage(file as any)) {
+        // 使用函数式更新，确保状态更新正确
+        setImageFileList((prev) => {
           // 检查是否已存在相同文件
           const exists = prev.some((f) => f.uid === file.uid);
 
@@ -188,7 +246,7 @@ const FormContent = () => {
           <Form.Item name="message" label="消息内容">
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             label={
               <div>
                 <span>图片链接（ ; 分隔可支持多张图片）</span>
@@ -204,9 +262,14 @@ const FormContent = () => {
             name="urls"
           >
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item label="上传图片" name="images">
-            <Upload accept="image/*" multiple {...uploadProps}>
+            <Upload accept="image/*" multiple {...imageUploadProps}>
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+          </Form.Item>
+          <Form.Item label="上传文件" name="images">
+            <Upload accept="*" multiple {...uploadProps}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>

@@ -115,6 +115,22 @@ export const uploadToQiniu = (file: RcFile): Promise<string> => {
  * @returns 是否通过验证
  */
 export const validateFile = (file: RcFile): boolean => {
+  // 验证文件大小（2MB）
+  const isLt2M = file.size / 1024 / 1024 < 40;
+  if (!isLt2M) {
+    message.error(file.name + ":图片大小不能超过 40MB!");
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * 验证文件
+ * @param file 要验证的文件
+ * @returns 是否通过验证
+ */
+export const validateImage = (file: RcFile): boolean => {
   // 验证文件类型
   const isImage = file.type.startsWith("image/");
   if (!isImage) {

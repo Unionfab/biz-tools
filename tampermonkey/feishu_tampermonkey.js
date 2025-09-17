@@ -30,7 +30,6 @@ const CONFIG = {
     UPDATE_FILE_PATH: {
       杨宁: "C:\\WorkSpace\\理财文件\\飞书\\update\\yangning.json",
       睿见视界: "C:\\WorkSpace\\理财文件\\飞书\\update\\ruijian.json",
-      梅森: "C:\\WorkSpace\\理财文件\\飞书\\update\\meisen.json",
       大爷周: "C:\\WorkSpace\\理财文件\\飞书\\update\\dayezhou.json",
     },
   },
@@ -60,7 +59,7 @@ const getLocalPostFile = async (feedType) => {
           }
 
           const result = JSON.parse(res.responseText);
-          console.log("获取本地日志文件:", result);
+          console.log("获取本地日志文件:", feedType, result);
           resolve(result);
         } catch (error) {
           console.error("解析响应失败:", error);
@@ -146,7 +145,10 @@ const getLocalPostFile = async (feedType) => {
 
       try {
         const { data: localPostConfig } = await getLocalPostFile(feedType);
-        console.log(">>> 本地消息列表", localPostConfig.posts);
+        console.log(
+          ">>> 本地【" + feedType + "】消息列表",
+          localPostConfig.posts
+        );
 
         // 遍历新消息
         for (const newPost of posts) {
@@ -190,7 +192,6 @@ const getLocalPostFile = async (feedType) => {
             );
 
             if (!storagePost || storagePost?.data_id !== newPost.data_id) {
-              console.log("====> savePost", newPost);
               this.savePost({
                 ...this.lastPost,
                 [feedType]: {
@@ -235,7 +236,7 @@ const getLocalPostFile = async (feedType) => {
           onload: (res) => {
             try {
               const result = JSON.parse(res.responseText);
-              console.log("消息发送成功:", result);
+              console.log("【" + feedType + "】消息发送成功:", result, posts);
               resolve(result);
             } catch (error) {
               console.error("解析响应失败:", error);
@@ -325,10 +326,6 @@ const getLocalPostFile = async (feedType) => {
             lastPost?.睿见视界?.content || "无"
           }</h4>
           <div style="margin: 8px 0; border-bottom:1px solid white"></div>
-          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【梅森】：${
-            lastPost?.梅森?.content || "无"
-          }</h4>
-          <div style="margin: 8px 0; border-bottom:1px solid white"></div>
           <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【大爷周】：${
             lastPost?.大爷周?.content || "无"
           }</h4>
@@ -360,10 +357,6 @@ const getLocalPostFile = async (feedType) => {
       } else if (feedType == "杨宁") {
         element = document.querySelector(
           '[data-feed-id="7458115569351426076"]'
-        );
-      } else if (feedType == "梅森") {
-        element = document.querySelector(
-          '[data-feed-id="7545426336593674259"]'
         );
       } else if (feedType == "大爷周") {
         element = document.querySelector(
@@ -458,19 +451,12 @@ const getLocalPostFile = async (feedType) => {
           new Date().toISOString()
         );
 
-        const targetPosts1 = await this.checkNewPosts("杨宁");
-        const targetPosts2 = await this.checkNewPosts("睿见视界");
-        const targetPosts3 = await this.checkNewPosts("梅森");
-        const targetPosts4 = await this.checkNewPosts("大爷周");
+        await this.checkNewPosts("大爷周");
 
-        try {
-          await this.messageHandler.sendToServer("杨宁", targetPosts1);
-          await this.messageHandler.sendToServer("睿见视界", targetPosts2);
-          await this.messageHandler.sendToServer("梅森", targetPosts3);
-          await this.messageHandler.sendToServer("大爷周", targetPosts4);
-        } catch (error) {
-          console.error("发送消息失败:", error);
-        }
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        // const targetPosts2 = await this.checkNewPosts("睿见视界");
+
+        await this.checkNewPosts("杨宁");
 
         if (panelType == "create") {
           this.controlPanel.create();
@@ -512,9 +498,20 @@ const getLocalPostFile = async (feedType) => {
 
     async checkNewPosts(feedType) {
       try {
+        console.log(
+          `>>> 选择条目：(` + utils.formatTime(new Date()) + ")" + feedType
+        );
+
         this.selectFeedItem(feedType);
 
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+
+        console.log(
+          `>>> 抓取聊天框消息列表：(` +
+            utils.formatTime(new Date()) +
+            ")" +
+            feedType
+        );
 
         // 获取消息列表容器
         const messageContainer = document.querySelector(
@@ -544,7 +541,11 @@ const getLocalPostFile = async (feedType) => {
 
         if ((targetPosts || []).length < 1) return;
 
-        return targetPosts;
+        try {
+          await this.messageHandler.sendToServer(feedType, targetPosts);
+        } catch (error) {
+          console.error("发送消息失败:", error);
+        }
       } catch (error) {
         console.error("检查新消息时出错:", error);
       }
