@@ -19,6 +19,15 @@ interface DingTalkMessage {
   // 其他类型可按需添加
 }
 
+interface FeiShuMessage {
+  timestamp?: string,        // 时间戳。
+  sign?: string,
+  msg_type: "text" | 'post';
+  content: {
+    text: string;
+  }
+}
+
 interface Webhook {
   desc: string;
   src: string;
@@ -31,7 +40,7 @@ function getSign(secret: string) {
 
   const sign = crypto
     .createHmac("sha256", secret)
-    .update(stringToSign)
+    .update(stringToSign, 'utf-8')
     .digest("base64");
 
   return {
@@ -40,13 +49,23 @@ function getSign(secret: string) {
   };
 }
 
+// 生成签名
+function getFeiShuSign(secret: string) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const stringToSign = `${timestamp}\n${secret}`;
+
+  const sign = crypto.createHmac('sha256', stringToSign).digest('base64');
+
+  return { sign, timestamp };
+}
+
 /**
  * 发送文本消息到钉钉群聊
  * @param webhook Webhook 地址
  * @param content 消息内容
  * @returns Promise<boolean> 是否发送成功
  */
-export const sendTextMessage = async (
+export const sendDingTalkTextMessage = async (
   webhook: Webhook,
   content: string
 ): Promise<boolean> => {
@@ -57,7 +76,7 @@ export const sendTextMessage = async (
     },
   };
 
-  return sendMessage(webhook, message);
+  return sendDingTalkMessage(webhook, message);
 };
 
 /**
@@ -67,7 +86,7 @@ export const sendTextMessage = async (
  * @param text Markdown 格式的消息内容
  * @returns Promise<boolean> 是否发送成功
  */
-export const sendMarkdownMessage = async (
+export const sendDingTalkMarkdownMessage = async (
   webhook: Webhook,
   title: string,
   text: string
@@ -80,7 +99,7 @@ export const sendMarkdownMessage = async (
     },
   };
 
-  return sendMessage(webhook, message);
+  return sendDingTalkMessage(webhook, message);
 };
 
 /**
@@ -92,7 +111,7 @@ export const sendMarkdownMessage = async (
  * @param picUrl 图片URL（可选）
  * @returns Promise<boolean> 是否发送成功
  */
-export const sendLinkMessage = async (
+export const sendDingTalkLinkMessage = async (
   webhook: Webhook,
   title: string,
   text: string,
@@ -109,7 +128,7 @@ export const sendLinkMessage = async (
     },
   };
 
-  return sendMessage(webhook, message);
+  return sendDingTalkMessage(webhook, message);
 };
 
 function wrapLinks(text: string) {
@@ -175,7 +194,7 @@ export const createImageMarkdown = ({
  * @param message 消息内容
  * @returns Promise<boolean> 是否发送成功
  */
-const sendMessage = async (
+const sendDingTalkMessage = async (
   webhook: Webhook,
   message: DingTalkMessage
 ): Promise<boolean> => {
@@ -206,6 +225,50 @@ const sendMessage = async (
     );
 
     if (response.status === 200 && response.data.errcode === 0) {
+      console.log("消息发送成功:", response.data);
+      return true;
+    } else {
+      console.error("消息发送失败:", response.data);
+      return false;
+    }
+  } catch (error) {
+    console.error("发送钉钉消息出错:", error);
+    return false;
+  }
+};
+
+/**
+ * 发送消息到钉钉群聊
+ * @param webhook Webhook 地址
+ * @param message 消息内容
+ * @returns Promise<boolean> 是否发送成功
+ */
+const sendFeiShuMessage = async (
+  webhook: Webhook,
+  message: FeiShuMessage
+): Promise<boolean> => {
+  try {
+    console.log("webhook", webhook);
+
+    let finalMessage: Partial<FeiShuMessage> = {}
+
+    const { timestamp, sign } = getFeiShuSign(webhook.secret as string);
+
+    finalMessage = { ...message, sign, timestamp: timestamp.toString() }
+
+    const response = await axios.post(
+      webhook.src,
+      finalMessage,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log('=====>response', response)
+
+    if (response.status === 200 && response.data.msg === "success") {
       console.log("消息发送成功:", response.data);
       return true;
     } else {
@@ -253,7 +316,15 @@ export const batchSendMarkdownMessage = async (
 
   await Promise.all(
     webhooks.map(async (webhook) => {
-      const result = await sendMarkdownMessage(webhook, title, text);
+
+      let result;
+
+      if (webhook.src.includes('feishu')) {
+        result = await sendFeiShuMessage(webhook, { msg_type: "text", content: { text } });
+      } else if (webhook.src.includes('dingtalk')) {
+        result = await sendDingTalkMarkdownMessage(webhook, title, text);
+      }
+
       if (result) {
         success++;
       } else {
