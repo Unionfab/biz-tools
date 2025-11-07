@@ -14,7 +14,7 @@
 // 配置常量
 const CONFIG = {
   REFRESH_INTERVAL: 60 * 30 * 1000,
-  CHECK_INTERVAL: 60 * 1000, // 60s 监测一次
+  CHECK_INTERVAL: 100 * 1000, // 60s 监测一次
   STORAGE_KEYS: {
     LAST_REFRESH: "lastRefreshDate",
     LAST_CHECK: "lastCheckDate",
@@ -28,9 +28,8 @@ const CONFIG = {
       Accept: "application/json",
     },
     UPDATE_FILE_PATH: {
-      杨宁: "C:\\WorkSpace\\理财文件\\飞书\\update\\yangning.json",
-      睿见视界: "C:\\WorkSpace\\理财文件\\飞书\\update\\ruijian.json",
-      大爷周: "C:\\WorkSpace\\理财文件\\飞书\\update\\dayezhou.json",
+      潜伏王者: "C:\\WorkSpace\\理财文件\\飞书\\update\\qianfu.json",
+      邻居大爷: "C:\\WorkSpace\\理财文件\\飞书\\update\\dayezhou.json",
     },
   },
   TIME_RANGE: {
@@ -59,7 +58,12 @@ const getLocalPostFile = async (feedType) => {
           }
 
           const result = JSON.parse(res.responseText);
-          console.log("获取本地日志文件:", feedType, result);
+          console.log(
+            "获取本地日志文件:",
+            CONFIG.API.UPDATE_FILE_PATH[feedType],
+            feedType,
+            result
+          );
           resolve(result);
         } catch (error) {
           console.error("解析响应失败:", error);
@@ -124,6 +128,7 @@ const getLocalPostFile = async (feedType) => {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
+        fractionalSecondDigits: 2,
       });
     },
   };
@@ -236,7 +241,12 @@ const getLocalPostFile = async (feedType) => {
           onload: (res) => {
             try {
               const result = JSON.parse(res.responseText);
-              console.log("【" + feedType + "】消息发送成功:", result, posts);
+              console.log(
+                "【" + feedType + "】消息发送成功:",
+                CONFIG.API.UPDATE_FILE_PATH[feedType],
+                result,
+                posts
+              );
               resolve(result);
             } catch (error) {
               console.error("解析响应失败:", error);
@@ -265,18 +275,18 @@ const getLocalPostFile = async (feedType) => {
       this.panel = document.createElement("div");
       this.panel.id = "checkNewPostsPanel";
       this.panel.style.cssText = `
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      z-index: 9999;
-      width: 250px;
-      font-family: system-ui, -apple-system, sans-serif;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    `;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 9999;
+  width: 250px;
+  font-family: system-ui, -apple-system, sans-serif;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+`;
 
       this.update();
       document.body.appendChild(this.panel);
@@ -300,38 +310,34 @@ const getLocalPostFile = async (feedType) => {
 
       if (!utils.isWithinTimeRange()) {
         this.panel.innerHTML = `
-      <div>
-        <h3 style="margin:0 0 10px 0;font-size:16px">监控已停止</h3>
-      </div>
-    `;
+  <div>
+    <h3 style="margin:0 0 10px 0;font-size:16px">监控已停止</h3>
+  </div>
+`;
       } else {
         this.panel.innerHTML = `
-      <div>
-        <h3 style="margin:0 0 10px 0;font-size:16px">监控运行中...</h3>
-        <div style="font-size:14px;line-height:1.4">
-          <div>上次刷新时间：${
-            checkTime ? utils.formatTime(new Date(checkTime)) : "无"
-          }</div>
-          <div>消息捕获时间：${
-            lastPost?.insertAt
-              ? utils.formatTime(new Date(lastPost?.insertAt))
-              : "无"
-          }</div>
-          <div style="margin: 8px 0; border-bottom:1px solid white"></div>
-          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【杨宁】：${
-            lastPost?.杨宁?.content || "无"
-          }</h4>
-          <div style="margin: 8px 0; border-bottom:1px solid white"></div>
-          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【睿见视界】：${
-            lastPost?.睿见视界?.content || "无"
-          }</h4>
-          <div style="margin: 8px 0; border-bottom:1px solid white"></div>
-          <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【大爷周】：${
-            lastPost?.大爷周?.content || "无"
-          }</h4>
-        </div>
-      </div>
-    `;
+  <div>
+    <h3 style="margin:0 0 10px 0;font-size:16px">监控运行中...</h3>
+    <div style="font-size:14px;line-height:1.4">
+      <div>上次刷新时间：${
+        checkTime ? utils.formatTime(new Date(checkTime)) : "无"
+      }</div>
+      <div>消息捕获时间：${
+        lastPost?.insertAt
+          ? utils.formatTime(new Date(lastPost?.insertAt))
+          : "无"
+      }</div>
+      <div style="margin: 8px 0; border-bottom:1px solid white"></div>
+      <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【潜伏王者】：${
+        lastPost?.潜伏王者?.content || "无"
+      }</h4>
+      <div style="margin: 8px 0; border-bottom:1px solid white"></div>
+      <h4 style="display:-webkit-box;text-overflow:ellipsis;overflow:hidden;-webkit-line-clamp:10;-webkit-box-orient:vertical">上次发帖内容【邻居大爷】：${
+        lastPost?.邻居大爷?.content || "无"
+      }</h4>
+    </div>
+  </div>
+`;
       }
     }
   }
@@ -346,37 +352,224 @@ const getLocalPostFile = async (feedType) => {
       this.refreshTimeout = null; // 添加刷新定时器引用
     }
 
-    selectFeedItem(feedType) {
-      // 选中元素后进行操作
-      let element;
+    // 辅助方法：查找目标元素
+    findTargetElement(feedType) {
+      const feedIdMap = {
+        潜伏王者: "7452643901724262403",
+        行为学: "7458115569351426076",
+        邻居大爷: "7552908450167209985",
+      };
 
-      if (feedType == "睿见视界") {
-        element = document.querySelector(
-          '[data-feed-id="7507981302985916435"]'
-        );
-      } else if (feedType == "杨宁") {
-        element = document.querySelector(
-          '[data-feed-id="7458115569351426076"]'
-        );
-      } else if (feedType == "大爷周") {
-        element = document.querySelector(
-          '[data-feed-id="7530465638810075155"]'
-        );
+      if (!feedIdMap[feedType]) {
+        console.warn(`未知的feed类型: ${feedType}`);
+        return null;
+      }
+
+      return document.querySelector(`[data-feed-id="${feedIdMap[feedType]}"]`);
+    }
+
+    // 辅助方法：点击并等待窗口打开
+    async clickAndWaitForWindow(targetElement, feedType) {
+      const timeout = 10000;
+      const interval = 200;
+
+      targetElement.click();
+      console.log(`>>> 已点击元素，等待窗口打开: ${feedType}`);
+
+      const startTime = Date.now();
+
+      while (Date.now() - startTime < timeout) {
+        const nameEl = document.querySelector(".chatWindow_chatName");
+        if (nameEl && nameEl.textContent.trim() === feedType) {
+          console.log(`>>> 聊天窗口已打开: ${feedType}`);
+          return true;
+        }
+        await new Promise((resolve) => setTimeout(resolve, interval));
+      }
+
+      return false;
+    }
+
+    // 辅助方法：等待消息容器渲染
+    async waitForMessageContainer() {
+      const timeout = 10000;
+      const interval = 200;
+      const startTime = Date.now();
+
+      while (Date.now() - startTime < timeout) {
+        const container = document.querySelector(".messageList");
+        if (container) {
+          console.log(">>> 消息容器渲染完成");
+          return container;
+        }
+        await new Promise((resolve) => setTimeout(resolve, interval));
+      }
+
+      return null;
+    }
+
+    // 辅助方法：等待消息列表稳定
+    async waitForMessageListStable(chatMessageContainer) {
+      return new Promise((resolve) => {
+        if (!chatMessageContainer) {
+          console.warn(">>> 未找到消息容器");
+          resolve();
+          return;
+        }
+
+        console.log(utils.formatTime(new Date()), ">>> 等待消息容器稳定");
+
+        let changeTimer = null;
+        const timeout = 13000;
+        const stabilityDelay = 5000;
+        let isStable = false;
+
+        const observer = new MutationObserver((mutations) => {
+          console.log(
+            utils.formatTime(new Date()),
+            ">>> 检测到DOM变化，数量:",
+            mutations.length
+          );
+
+          // 重置稳定性计时器
+          if (changeTimer) {
+            clearTimeout(changeTimer);
+          }
+
+          changeTimer = setTimeout(() => {
+            observer.disconnect();
+            isStable = true;
+            if (changeTimer) clearTimeout(changeTimer);
+            console.log(
+              utils.formatTime(new Date()),
+              ">>> 消息列表更新完成，已稳定",
+              isStable
+            );
+            resolve();
+          }, stabilityDelay);
+        });
+
+        // 开始观察
+        observer.observe(chatMessageContainer, {
+          childList: true,
+          subtree: true,
+        });
+
+        // 设置总超时
+        const timeoutId = setTimeout(() => {
+          observer.disconnect();
+          if (changeTimer) clearTimeout(changeTimer);
+
+          if (!isStable) {
+            console.warn(
+              utils.formatTime(new Date()),
+              ">>> 等待消息列表稳定超时"
+            );
+          }
+          resolve();
+        }, timeout);
+
+        // 清理函数
+        return () => {
+          clearTimeout(timeoutId);
+          if (changeTimer) clearTimeout(changeTimer);
+        };
+      });
+    }
+
+    async selectFeedItem(feedType) {
+      // 1. 查找目标元素
+      const element = this.findTargetElement(feedType);
+
+      if (!element) {
+        console.warn(`未找到类型为 "${feedType}" 的feed元素`);
+        return false;
       }
 
       const targetElement = element.querySelector(".a11y_feed_card_item");
 
-      if (targetElement) {
-        // 添加事件监听
-        targetElement.click();
-      } else {
-        console.log("未找到指定元素");
+      if (!targetElement) {
+        console.warn(`未找到目标元素 .a11y_feed_card_item`);
+        return false;
       }
+
+      // 2. 点击元素并等待窗口打开
+      const windowOpened = await this.clickAndWaitForWindow(
+        targetElement,
+        feedType
+      );
+      if (!windowOpened) {
+        console.warn(`聊天窗口未在指定时间内打开: ${feedType}`);
+        return false;
+      }
+
+      // 3. 等待消息容器渲染
+      const chatMessageContainer = await this.waitForMessageContainer();
+      if (!chatMessageContainer) {
+        console.warn("消息容器未在指定时间内渲染");
+        return false;
+      }
+
+      // 4. 等待消息列表稳定
+      await this.waitForMessageListStable(chatMessageContainer);
+
+      // 5. 额外等待确保完全渲染
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      console.log(
+        utils.formatTime(new Date()),
+        `>>> 成功选中并等待 "${feedType}" 完成`
+      );
+
+      return true;
     }
 
-    getLatestPosts() {
+    async getLatestPosts() {
       try {
-        const items = document.querySelectorAll(".messageItem-wrapper ");
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
+        console.log(utils.formatTime(new Date()), `>>> 抓取聊天框消息列表`);
+
+        // 获取消息列表容器
+        const messageContainer = document.querySelector(
+          ".messageList .scroller"
+        );
+
+        // 在容器内部滑动到底部
+        if (messageContainer) {
+          messageContainer.scrollTo({
+            top: messageContainer.scrollHeight + 2000,
+          });
+
+          // 等待滚动完成
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+
+          console.log(">>> 滚动完成");
+        }
+
+        // 获取底部新消息按钮
+        const countTip = document.querySelector(".messageTip__countTip");
+
+        if (countTip) {
+          countTip.click();
+
+          console.log(">>> 获取到新消息按钮，滚动完成");
+          // 等待滚动完成
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+        }
+
+        // 获取底部按钮
+        const toNewestTip = document.querySelector(".messageTip__toNewestTip");
+
+        if (toNewestTip) {
+          toNewestTip.click();
+
+          console.log(">>> 获取到底部按钮，滚动完成");
+          // 等待滚动完成
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+        }
+
+        const items = messageContainer.querySelectorAll(".messageItem-wrapper");
 
         console.log("====> feeditems", items);
 
@@ -451,18 +644,19 @@ const getLocalPostFile = async (feedType) => {
           new Date().toISOString()
         );
 
-        await this.checkNewPosts("大爷周");
+        await this.checkNewPosts("邻居大爷");
 
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        // const targetPosts2 = await this.checkNewPosts("睿见视界");
+        await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        await this.checkNewPosts("杨宁");
+        await this.checkNewPosts("潜伏王者");
 
         if (panelType == "create") {
           this.controlPanel.create();
         } else {
           this.controlPanel.update();
         }
+
+        console.log("执行结束:", utils.formatTime(new Date()));
       };
 
       // 等待首次检查完成
@@ -502,33 +696,14 @@ const getLocalPostFile = async (feedType) => {
           `>>> 选择条目：(` + utils.formatTime(new Date()) + ")" + feedType
         );
 
-        this.selectFeedItem(feedType);
+        const resp = await this.selectFeedItem(feedType);
 
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-
-        console.log(
-          `>>> 抓取聊天框消息列表：(` +
-            utils.formatTime(new Date()) +
-            ")" +
-            feedType
-        );
-
-        // 获取消息列表容器
-        const messageContainer = document.querySelector(
-          ".messageList .scroller"
-        );
-
-        // 在容器内部滑动到底部
-        if (messageContainer) {
-          messageContainer.scrollTo({
-            top: messageContainer.scrollHeight + 2000,
-          });
-
-          // 等待滚动完成
-          await new Promise((resolve) => setTimeout(resolve, 1500));
+        if (!resp) {
+          console.warn(">>> selectFeedItem 执行失败");
+          return;
         }
 
-        const posts = this.getLatestPosts();
+        const posts = await this.getLatestPosts();
 
         console.log(">>> 获取到【" + feedType + "】消息列表", posts);
 

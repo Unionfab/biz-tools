@@ -40,7 +40,7 @@ const CONFIG = {
     START_MINUTE: 10,
     END_HOUR: 18,
     END_MINUTE: 30,
-    WEEKDAYS: [1, 2, 3, 4, 5], // 周一到周五
+    WEEKDAYS: [0, 1, 2, 3, 4, 5], // 周一到周五
   },
 };
 

@@ -36,7 +36,7 @@ const CONFIG = {
     START_MINUTE: 15,
     END_HOUR: 16,
     END_MINUTE: 50,
-    WEEKDAYS: [1, 2, 3, 4, 5], // 周一到周五
+    WEEKDAYS: [0, 1, 2, 3, 4, 5], // 周一到周五
   },
 };
 
@@ -57,7 +57,7 @@ const getPostList = async () => {
         referer: "https://h5.sass.zhuoshangsoft.com/",
       },
       // data: "teacher_code=3825633306&page=1&size=10&token=27c30828a1fd47040025a457fc8e2125",
-      data: "teacher_code=3825633306&page=1&size=10&last_id=&token=27c30828a1fd47040025a457fc8e2125&browserName=chrome&browserVersion=109.0.0.0&hostVersion=109.0.0.0&deviceModel=PC&deviceBrand=&osVersion=10^%^20x64&osName=windows&host=h5.sass.zhuoshangsoft.com&cid=&version_num=1.9.3&versionNums=193&downSource=update&env=prod&source=h5",
+      data: "teacher_code=3825633306&page=1&size=10&last_id=&token=94525c2300fdb7b0dc45f3275b715588&browserName=chrome&browserVersion=139.0.0.0&hostVersion=139.0.0.0&deviceModel=PC&deviceBrand=&osVersion=10%20x64&osName=windows&host=h5.sass.zhuoshangsoft.com&cid=&version_num=1.9.3&versionNums=193&downSource=update&env=prod&source=h5",
       onload: function (response) {
         try {
           const result = JSON.parse(response.responseText);
@@ -189,7 +189,7 @@ const getLocalPostFile = async () => {
 
             setTimeout(() => {
               window.location.reload();
-            }, 2000);
+            }, 3000);
             break;
           }
 
