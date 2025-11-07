@@ -91,8 +91,6 @@ const FormContent = () => {
       if (!!webhooks && (webhooks || []).length > 0) {
         const { fileUrls, imageUrls } = await handleSubmit();
 
-        console.log("value.urls", value.urls);
-
         // const finalFileUrls = (fileUrls || [])
         //   .concat(
         //     (value.urls || "")
@@ -171,10 +169,12 @@ const FormContent = () => {
 
       return { fileUrls, imageUrls };
     } catch (error) {
-      return { fileUrls, imageUrls };
 
       console.error("上传失败:", error);
       message.error("上传失败，请重试！");
+
+      return { fileUrls, imageUrls };
+
     }
   };
 
@@ -246,29 +246,12 @@ const FormContent = () => {
           <Form.Item name="message" label="消息内容">
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
-          {/* <Form.Item
-            label={
-              <div>
-                <span>图片链接（ ; 分隔可支持多张图片）</span>
-                <Button
-                  type="link"
-                  href="https://www.superbed.cn/"
-                  target="_blank"
-                >
-                  点击跳转图床
-                </Button>
-              </div>
-            }
-            name="urls"
-          >
-            <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
-          </Form.Item> */}
           <Form.Item label="上传图片" name="images">
             <Upload accept="image/*" multiple {...imageUploadProps}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
-          <Form.Item label="上传文件" name="images">
+          <Form.Item label="上传文件" name="files">
             <Upload accept="*" multiple {...uploadProps}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>

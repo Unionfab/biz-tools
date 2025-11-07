@@ -63,6 +63,7 @@ app.post("/writeToArray", (req, res) => {
 
   const originContent = JSON.parse(fs.readFileSync(content.filePath, "utf-8"));
 
+  const logs = [...originContent.logs, { time: new Date().toLocaleString(), filePath: content.filePath, posts: content.posts }]
   const updatedPosts = [...originContent.posts, ...content.posts].slice(-80);
 
   console.log("====> updatedPosts", updatedPosts);
@@ -70,6 +71,7 @@ app.post("/writeToArray", (req, res) => {
   const finalContent = {
     updateAt: new Date().toLocaleString(),
     posts: updatedPosts,
+    logs
   };
 
   fs.writeFileSync(content.filePath, JSON.stringify(finalContent), "utf-8");

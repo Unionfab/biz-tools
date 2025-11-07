@@ -1,12 +1,12 @@
 {
   "teacher": [
     {
-      "name": "feishu",
+      "name": "都业华",
       "webhooks": [
         {
-          "desc": "姆爷永义九年级二班",
-          "secret": "FVcSPoRsRtLRQ9LCWdhRpf",
-          "src": "https://open.feishu.cn/open-apis/bot/v2/hook/e6e23c62-d557-4c7e-a125-b64ff4216693"
+          "desc": "都业华",
+          "secret": "SEC84338efd9234eaaeee03eb8a70984ac0475bdca48f7bdcc1e56973e644f7b866",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=a3ffa29517400e84fc23301e29faade1fbc7b5857207f9118d6c241456921ef6"
         }
       ]
     },
@@ -144,6 +144,16 @@
           "desc": "马老师永义冲刺九年级2班",
           "secret": "SEC1df494c1e82e016240f91a9107b913ac811432a3460b4e7a1ffd33004e7aaacc",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=3ad0c641ec3cd2f5b539198934ff2418300df799ee81b8b455a33c9e7d37cec8"
+        },
+        {
+          "desc": "二年三班马老师家长群",
+          "secret": "uXjbdOB9sNR6MZaCAvIicg",
+          "src": "https://open.feishu.cn/open-apis/bot/v2/hook/534f562b-f5d5-4c49-bed5-cc4c9e5ddef0"
+        },
+        {
+          "desc": "Jony",
+          "secret": "SECf26742a872bfa7ce40eacc567b5615fb02d2adec43dd2e8135bcb262179352a0",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=9cd047adad3b74174e5fc98eae0fd973515557f824b007bf5a4cd40cf70a27de"
         }
       ]
     },
@@ -165,6 +175,11 @@
         {
           "desc": "喜学众筹发发群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=d2fa059ce6dd0e7c7c6e875509583bd594927d5e4063f2e42d463b952d24529d"
+        },
+        {
+          "desc": "喜学永义九年级二班",
+          "secret": "SEC55c8dd2ee8992cc7954a15dc97879ed85bc7560e24e566f632aaa62dac8172fa",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7e18f4e5bad9dea0471ae3d63fa73e4355911a17524b9c41576007ee51456405"
         }
       ]
     },
@@ -542,6 +557,11 @@
           "desc": "格老师众筹元元群",
           "secret": "SEC7ceaa60a58caea3189572f670a51df641281dfd4440e845a9163d4d11dfa3b20",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=1edb4baa7ca63b87b197a95342c2b7de68b49177ec8b36663d5b1728219c8af5"
+        },
+        {
+          "desc": "格兰投研(外部)",
+          "secret": "SEC6018be135010e2029d8182b6ec4af4493db6a5d861e6188a7e701e9ed0474f04",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=081eb60a1bd93bd2222618cc714a1a661ebab137093f28664aad16280b956a6c"
         }
       ]
     },
