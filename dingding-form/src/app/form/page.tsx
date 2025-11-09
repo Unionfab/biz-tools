@@ -13,6 +13,8 @@ import {
   Typography,
   Select,
   Form,
+  Row,
+  Col,
   Input,
   message,
   Skeleton,
@@ -57,28 +59,8 @@ export default function Home() {
 
 const FormContent = () => {
   const [form] = Form.useForm();
-  const [uploading, setUploading] = useState(false);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [imageFileList, setImageFileList] = useState<UploadFile[]>([]);
-
-  // const { data: config, isLoading } = useQuery({
-  //   queryKey: ["config"],
-  //   retry: 3,
-  //   queryFn: async () => {
-  //     const qiniuUrl = process.env.NEXT_PUBLIC_QINIU_CONFIG_RESOURCE_URL;
-  //     const configPath = process.env.NEXT_PUBLIC_CONFIG_PATH;
-
-  //     if (!qiniuUrl || !configPath) throw new Error("配置URL或路径未设置");
-
-  //     const response = await fetch(qiniuUrl + configPath);
-
-  //     return (await response.json()) as Config;
-  //   },
-  //   onError: (error) => {
-  //     message.error("配置加载失败");
-  //     console.error(error);
-  //   },
-  // });
 
   const sendMessageMutation = useMutation({
     mutationFn: async () => {
@@ -88,24 +70,9 @@ const FormContent = () => {
 
       const webhooks = getTeacherWebhooks(config, value.teacher);
 
+
       if (!!webhooks && (webhooks || []).length > 0) {
         const { fileUrls, imageUrls } = await handleSubmit();
-
-        // const finalFileUrls = (fileUrls || [])
-        //   .concat(
-        //     (value.urls || "")
-        //       .replace(/\s+/g, "") // 移除所有换行符
-        //       .split(";")
-        //   )
-        //   .filter((u) => !!u?.url);
-
-        // const finalImageUrls = (imageUrls || [])
-        //   .concat(
-        //     (value.urls || "")
-        //       .replace(/\s+/g, "") // 移除所有换行符
-        //       .split(";")
-        //   )
-        //   .filter((u) => !!u?.url);
 
         const md = createImageMarkdown({
           title: `招财转运 【${value.teacher}】 老师消息来啦`,
@@ -123,7 +90,9 @@ const FormContent = () => {
       message.success("提交成功！");
 
       setFileList([]);
-      form.resetFields();
+      setImageFileList([])
+      // form.resetFields();
+      form.setFieldValue("message", null)
     },
     onError: (error) => {
       message.error(error instanceof Error ? error.message : "提交失败");
@@ -246,12 +215,12 @@ const FormContent = () => {
           <Form.Item name="message" label="消息内容">
             <Input.TextArea rows={4} autoSize={{ minRows: 6, maxRows: 12 }} />
           </Form.Item>
-          <Form.Item label="上传图片" name="images">
+          <Form.Item label="上传图片" >
             <Upload accept="image/*" multiple {...imageUploadProps}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
-          <Form.Item label="上传文件" name="files">
+          <Form.Item label="上传文件" >
             <Upload accept="*" multiple {...uploadProps}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>

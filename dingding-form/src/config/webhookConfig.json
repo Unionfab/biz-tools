@@ -151,9 +151,14 @@
           "src": "https://open.feishu.cn/open-apis/bot/v2/hook/534f562b-f5d5-4c49-bed5-cc4c9e5ddef0"
         },
         {
-          "desc": "Jony",
+          "desc": "大喷子众筹群",
           "secret": "SECf26742a872bfa7ce40eacc567b5615fb02d2adec43dd2e8135bcb262179352a0",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=9cd047adad3b74174e5fc98eae0fd973515557f824b007bf5a4cd40cf70a27de"
+        },
+        {
+          "desc": "马老师永义九年级三班",
+          "secret": "SECb3601210aebe59f1ab86195348608764aad817d3c6c2d43a7d989112f378bc2b",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=9a0c6f4e2345b055bc2fa95cc9a7cd0f8ca8fbb322b9d547592f7d7f21432c18"
         }
       ]
     },
@@ -210,6 +215,11 @@
           "desc": "姆爷永义九年级二班",
           "secret": "FVcSPoRsRtLRQ9LCWdhRpf",
           "src": "https://open.feishu.cn/open-apis/bot/v2/hook/e6e23c62-d557-4c7e-a125-b64ff4216693"
+        },
+        {
+          "desc": "姆爷的守护",
+          "secret": "SEC7bba8152bb81a625f6d6b111c14fb50fc3184f03cfef0f2e2472a7710e6ab0b3",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=0cd484839fa36b3790778b091d3190e51c718e08d7e0102f1b312bf3f1ed1223"
         }
       ]
     },
@@ -337,6 +347,11 @@
           "desc": "花姐投研众筹群！",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=9f4b9f55cdd7ad97b00b316abe6ec25acc9ec28161f220c1eaae0b65b0d28dd4",
           "secret": "SECa6da36ee0b57ca4384b0c1b5e1fc42a0e313c9aa950b1b78aa6a160b8e919ec5"
+        },
+        {
+          "desc": "大师姐天天向上",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=3fe80549f8835383e9619137eb390a364337b81deef80b9b5dbd2b48aaf3b6ff",
+          "secret": "SEC35d696d58a5a80cb28e7bb065ec1ccca4b16c4ef5ee7f87bb8076c4f5f25c703"
         }
       ]
     },
@@ -390,6 +405,11 @@
           "desc": "价值十一年永义九年级二班",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=0b5b1b7d1648e76a22e7bfc0b6ca20385757bd8559925ce4b200297cb12714cc",
           "secret": "SECae9cd396dc6c2709363392d603f931cf5ff60ea2e517ac65fdf9818ac61b5c23"
+        },
+        {
+          "desc": "价值十一年",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=73158a940713760f12d1efcd2d3a4b1138464137bf1910d3331873f04cdd2fda",
+          "secret": "SEC607cc63aae2deadc14b3e0f3518ba7cced3af89d94e13cc85d8ca2159afc9a0a"
         }
       ]
     },
@@ -408,6 +428,16 @@
           "desc": "梅老师众筹元元群",
           "secret": "SEC9754579009235888b402677450872f17668895e592f587989470bf41066dfc53",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=737ace59308ec3e6d282721bf7682d1e4cce655dace46854e0b2a4c07ec59dda"
+        },
+        {
+          "desc": "八叔天天向上",
+          "secret": "SEC11a9285ac77de1c66fa708c3ddcd1b03532b993c83aa082d29e5707de5815246",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=b8da3b8d55d724c1adb6fd38d36242bfc7b0026d1a2a5c4c73af9069e1728736"
+        },
+        {
+          "desc": "大棍子投研众筹群！",
+          "secret": "SEC58f819db79170e38080735010205c73c6327842466a95f1e95cade8ff545ed6a",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=9a724c59847aad2a5b9518aa8be18797273c95b79c28a3f24aa62656047a2b29"
         }
       ]
     },
@@ -534,6 +564,11 @@
         {
           "desc": "长安大湿人众筹群",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=e71fb98e4ee804d0d35a546a666d1caa23a3b2ebe35c62f7e68928068a5b7ac5"
+        },
+        {
+          "desc": "长安大湿人",
+          "secret": "SECad7dce21b7fe4c1ca9e6786d0c16ba3afc140d23c92d88bdeafda99ec5868aa8",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=7783ea01efebe53d1f52ffb1beb2b6ec318a043f37ecf8acff33d4f2d7e55df7"
         }
       ]
     },
@@ -591,6 +626,56 @@
           "desc": "老白分析室众筹群",
           "secret": "SEC8d56027ce303309013601c649c4f14cb4b4344ca469e15988f93bf2973b6d8bc",
           "src": "https://oapi.dingtalk.com/robot/send?access_token=ea1574b4ab9ea545cd09774899e5cb1b4c9316b6f360292a36c94e74a78aae7a"
+        }
+      ]
+    },
+    {
+      "name": "书院",
+      "webhooks": [
+        {
+          "desc": "大背头投研众筹群",
+          "secret": "SEC6018be135010e2029d8182b6ec4af4493db6a5d861e6188a7e701e9ed0474f04",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=081eb60a1bd93bd2222618cc714a1a661ebab137093f28664aad16280b956a6c"
+        }
+      ]
+    },
+    {
+      "name": "一手哥消息汇总",
+      "webhooks": [
+        {
+          "desc": "一手哥消息汇总",
+          "secret": "SEC3c53bceb72f52dacaf65722eb99791f35d255ac003154009a4462af1dd014607",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=cd2f940e6d8e8406397ee9f14044ed8a5a5236862c56fd19cf1517b494e5fa59"
+        }
+      ]
+    },
+    {
+      "name": "红孩儿盘中",
+      "webhooks": [
+        {
+          "desc": "红孩儿交流群",
+          "secret": "SECc21a837a930449a9d96455ca37dc3f868e10ce0523cadda6163e971cda3cba82",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=199e598323e3d62eb73944652437acbf07eadcd4ac5041eecfaa20cc051fcdeb"
+        }
+      ]
+    },
+    {
+      "name": "先知研报",
+      "webhooks": [
+        {
+          "desc": "先知研报交流群",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=92b2220a3c0a825048fe1e49228f95ba534f4af516df4a96a96c715733030658",
+          "secret": "SECe8352999dea9bb02316379eb805d59c6608a1721fe79cd1c9de0b2b724d0e786"
+        }
+      ]
+    },
+    {
+      "name": "壹霆",
+      "webhooks": [
+        {
+          "desc": "壹霆交流群",
+          "secret": "SEC5666f715fbfa58c21103d528f76c39dc5defa5b0b61b0b27e27422d554692e8a",
+          "src": "https://oapi.dingtalk.com/robot/send?access_token=9ff3fb5e5d3efdd2f1b6a33f011c40fa61bbd3c6588917bcd2dbda289bbb98a2"
         }
       ]
     },

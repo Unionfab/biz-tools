@@ -9,7 +9,7 @@
     display: grid;
     align-content: flex-start;
     justify-items: center;
-    min-height: 100svh;
+    min-height: 90vh;
     padding: 80px;
     gap: 2rem;
     font-family: var(--font-geist-sans);
@@ -128,7 +128,6 @@
   @media (max-width: 600px) {
     .page {
       padding: 32px;
-      padding-bottom: 80px;
     }
   
     .main {
