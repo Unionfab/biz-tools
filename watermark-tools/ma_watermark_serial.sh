@@ -157,7 +157,7 @@ process_video() {
 
     ffmpeg -nostdin -stats \
         -i "$input_file" \
-        -vf "drawtext=text='该视频仅供 ${wxid} 学习，请勿二次传播或售卖，否则涉及到的法律责任将由 ${wxid} 承担':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position1}:enable='${time_filter1}',drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任：识别码 ${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position2}:enable='${time_filter2}',drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任\n微信号或 ID：${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position3}:enable='${time_filter3}'" \
+        -vf "drawtext=text='该视频仅供 ${wxid} 学习，源头 QQ：649559675，勿二次传播，否则涉及到的法律责任将由 ${wxid} 承担':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position1}:enable='${time_filter1}',drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任：识别码 ${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position2}:enable='${time_filter2}',drawtext=text='仅供以下人员查看学习，请勿公开传播，否则可能承担法律责任\n微信号或 ID：${wxid}(${nickname})':fontfile=/System/Library/Fonts/PingFang.ttc:fontsize=16:fontcolor=white@0.5:${position3}:enable='${time_filter3}'" \
         -c:v libx264 \
         -codec:a copy \
         -y \
